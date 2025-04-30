@@ -1,33 +1,45 @@
 import { Fragment } from 'react';
 import { Box, Grid } from '@mui/material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import MainArea from './MainArea.jsx';
+import Home from './Home.jsx';
+import LoginForm from './LoginForm.jsx';
+import RegisterForm from './RegisterForm.jsx';
 
 export default function Layout() {
   return (
     <Fragment>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container>
-          <Grid size={12}>
-            <Header />
+      <BrowserRouter>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container>
+            <Grid size={12}>
+              <Header />
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container>
-          <Grid size={12}>
-            <MainArea />
+        </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container>
+            <Grid size={12}>
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<LoginForm />} />
+                  <Route path="/register" element={<RegisterForm />} />
+                </Routes>
+              </main>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container>
-          <Grid size={12}>
-            <Footer />
+        </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container>
+            <Grid size={12}>
+              <Footer />
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </BrowserRouter>
     </Fragment>
   );
 }
