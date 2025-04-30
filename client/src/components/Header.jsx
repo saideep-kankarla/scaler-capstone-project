@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Logo from '../assets/logo.png';
-import { Box, Stack, Divider } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -24,7 +24,6 @@ const Header = () => {
           <Link to="/admin">Admin Login</Link>
         </Stack>
       </Box>
-      <Divider />
     </Fragment>
   );
 };

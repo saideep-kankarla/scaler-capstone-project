@@ -2,7 +2,12 @@
 @import './font';
 
 body {
-  background-color: #242424;
+  .albumCardCss {
+    cursor: pointer;
+    width: 264px;
+    max-width: 264px;
+    height: auto;
+  }
   .login-form {
     border: 2px solid #ccc;
     margin: 50px auto;

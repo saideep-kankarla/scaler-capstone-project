@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Divider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Header.jsx';
@@ -19,6 +19,8 @@ export default function Layout() {
             </Grid>
           </Grid>
         </Box>
+        <Divider />
+
         <Box sx={{ flexGrow: 1 }}>
           <Grid container>
             <Grid size={12}>
@@ -32,6 +34,8 @@ export default function Layout() {
             </Grid>
           </Grid>
         </Box>
+        <Divider />
+
         <Box sx={{ flexGrow: 1 }}>
           <Grid container>
             <Grid size={12}>

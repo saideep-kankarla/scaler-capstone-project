@@ -1,50 +1,119 @@
 import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Stack } from '@mui/material';
+import devara from '../assets/thumbs/devara1.jpg';
+import animal from '../assets/thumbs/animal1.jpg';
+import hanuman from '../assets/thumbs/hanuman.jpg';
+import og from '../assets/thumbs/og.jpg';
+import kgf from '../assets/thumbs/kgf1.jpg';
+import salaar from '../assets/thumbs/salaar.jpg';
+import kick from '../assets/thumbs/kick.jpg';
 
 function Home() {
   return (
     <div style={{ padding: '20px' }}>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-        repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Ipsa veritatis exercitationem excepturi
-        vero totam dolorum explicabo quidem dolore laudantium! Quae quidem
-        aperiam cupiditate temporibus eaque distinctio dolore voluptatibus totam
-        veritatis.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        Aliquid repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. <br />
-        <br />
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-        repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Ipsa veritatis exercitationem excepturi
-        vero totam dolorum explicabo quidem dolore laudantium! Quae quidem
-        aperiam cupiditate temporibus eaque distinctio dolore voluptatibus totam
-        veritatis.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        Aliquid repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. <br />
-        <br />
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-        repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Ipsa veritatis exercitationem excepturi
-        vero totam dolorum explicabo quidem dolore laudantium! Quae quidem
-        aperiam cupiditate temporibus eaque distinctio dolore voluptatibus totam
-        veritatis.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        Aliquid repellendus sed dignissimos nulla iusto porro impedit sint nobis
-        similique? Qui ipsum laudantium exercitationem iusto molestias nostrum
-        id repellendus reprehenderit consequatur. <br />
-        <br />
-      </p>
+      <div>
+        <h2>Albums for you</h2>
+        <div>
+          <Stack
+            direction="row"
+            spacing={2}
+            useFlexGap
+            sx={{ flexWrap: 'wrap' }}
+          >
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={devara} title="Devara" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Devara
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={animal} title="Animal" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Animal
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={hanuman} title="Hanuman" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Hanuman
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={salaar} title="Salaar" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Salaar
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={og} title="OG" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  OG
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={kick} title="Kick" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Kick
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card className="albumCardCss">
+              <CardMedia sx={{ height: 264 }} image={kgf} title="Devara" />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Devara
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  A village chief's son secretly continues his father's mission
+                  to end smuggling, while pretending to be weak and maintaining
+                  the illusion that his father is still alive.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Stack>
+        </div>
+      </div>
     </div>
   );
 }
