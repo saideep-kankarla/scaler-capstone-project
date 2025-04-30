@@ -40,9 +40,10 @@ function Home() {
                   Animal
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  A village chief's son secretly continues his father's mission
-                  to end smuggling, while pretending to be weak and maintaining
-                  the illusion that his father is still alive.
+                  The son of a wealthy, powerful industrialist returns to India
+                  and undergoes a remarkable transformation as he becomes
+                  consumed by a quest for vengeance against those threatening
+                  his father's life.
                 </Typography>
               </CardContent>
             </Card>
@@ -53,9 +54,9 @@ function Home() {
                   Hanuman
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  A village chief's son secretly continues his father's mission
-                  to end smuggling, while pretending to be weak and maintaining
-                  the illusion that his father is still alive.
+                  In the tranquil village of Anjanadri, a petty thief stumbles
+                  upon Hanuman-like abilities. With the impending threats, he
+                  rises to become the hero they need.
                 </Typography>
               </CardContent>
             </Card>
@@ -66,9 +67,9 @@ function Home() {
                   Salaar
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  A village chief's son secretly continues his father's mission
-                  to end smuggling, while pretending to be weak and maintaining
-                  the illusion that his father is still alive.
+                  Just when the prince of Khansaar is about to rise to the
+                  throne, a plan of overthrowing him is exercised and only one
+                  man can help him retrieve power.
                 </Typography>
               </CardContent>
             </Card>
@@ -79,9 +80,10 @@ function Home() {
                   OG
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  A village chief's son secretly continues his father's mission
-                  to end smuggling, while pretending to be weak and maintaining
-                  the illusion that his father is still alive.
+                  OG (also known as They Call Him OG) is an upcoming Indian
+                  Telugu-language gangster action thriller film written and
+                  directed by Sujeeth and produced by D. V. V. Danayya of DVV
+                  Entertainment
                 </Typography>
               </CardContent>
             </Card>
@@ -99,10 +101,10 @@ function Home() {
               </CardContent>
             </Card>
             <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={kgf} title="Devara" />
+              <CardMedia sx={{ height: 264 }} image={kgf} title="KGF" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Devara
+                  KGF
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   A village chief's son secretly continues his father's mission
