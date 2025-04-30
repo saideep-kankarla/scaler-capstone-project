@@ -1,19 +1,17 @@
-import { useState } from 'react';
-import './App.css';
+import { Fragment } from 'react';
+import { CssBaseline, Container } from '@mui/material';
+import Layout from './components/Layout.jsx';
 
-function App() {
-  const [count, setCount] = useState(0);
+import './styles/App.scss';
 
+export default function App() {
   return (
-    <>
-      <h1>Chat App</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <Fragment>
+      <CssBaseline>
+        <Container component="main" maxWidth="false">
+          <Layout />
+        </Container>
+      </CssBaseline>
+    </Fragment>
   );
 }
-
-export default App;
