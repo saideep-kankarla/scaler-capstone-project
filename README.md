@@ -1,4 +1,4 @@
-# chat-app
+# audio-player
 
 Developing a capstone project for my scaler m.s degree
 
