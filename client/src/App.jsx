@@ -1,6 +1,7 @@
 import {Fragment} from 'react';
 import {CssBaseline, Container} from '@mui/material';
-import LoginForm from './components/LoginForm.jsx';
+// import LoginForm from './components/LoginForm.jsx';
+import Layout from './components/Layout.jsx';
 
 import './styles/App.scss';
  
@@ -10,7 +11,7 @@ export default function App() {
     <Fragment>
       <CssBaseline>
         <Container component="main" maxWidth="false">
-          <LoginForm />
+          <Layout />
         </Container>
       </CssBaseline>
     </Fragment>
