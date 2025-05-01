@@ -20,7 +20,7 @@ const Header = () => {
 
         <Stack direction="row" spacing={2}>
           <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
-            <Link to="/login">Pricing</Link>
+            <Link to="/pricing">Pricing</Link>
           </Typography>
 
           <Typography gutterBottom variant="button" sx={{ display: 'block' }}>

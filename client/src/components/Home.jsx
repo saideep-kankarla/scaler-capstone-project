@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import {
   Card,
   CardActionArea,
@@ -7,6 +7,7 @@ import {
   Typography,
   Stack,
 } from '@mui/material';
+
 import devara from '../assets/thumbs/devara1.jpg';
 import animal from '../assets/thumbs/animal1.jpg';
 import hanuman from '../assets/thumbs/hanuman.jpg';
@@ -14,10 +15,11 @@ import og from '../assets/thumbs/og.jpg';
 import kgf from '../assets/thumbs/kgf1.jpg';
 import salaar from '../assets/thumbs/salaar.jpg';
 import kick from '../assets/thumbs/kick.jpg';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div style={{ padding: '20px', maxWidth: '80%', margin: '0 auto' }}>
+    <Fragment>
       <div>
         <Typography gutterBottom variant="h4">
           <b>Albums for you</b>
@@ -29,24 +31,37 @@ function Home() {
             useFlexGap
             sx={{ flexWrap: 'wrap' }}
           >
-            <Card className="albumCardCss">
-              <CardActionArea>
-                <CardMedia sx={{ height: 264 }} image={devara} title="Devara" />
+            <Link to="/album/1">
+              <Card className="albumCardCss">
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    sx={{ height: 264 }}
+                    image={devara}
+                    alt="Devara"
+                  />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      component="div"
+                    >
+                      <b>Devara</b> <br /> Composer &bull; Anirudh
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Link>
+            <Link to="/album/2">
+              <Card className="albumCardCss">
+                <CardMedia sx={{ height: 264 }} image={animal} title="Animal" />
                 <CardContent>
                   <Typography gutterBottom variant="subtitle1">
-                    <b>Devara</b> <br /> Composer - Anirudh
+                    <b>Animal</b> <br /> Composer - Harshavardhan
                   </Typography>
                 </CardContent>
-              </CardActionArea>
-            </Card>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={animal} title="Animal" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1">
-                  <b>Animal</b> <br /> Composer - Harshavardhan
-                </Typography>
-              </CardContent>
-            </Card>
+              </Card>
+            </Link>
             <Card className="albumCardCss">
               <CardMedia sx={{ height: 264 }} image={hanuman} title="Hanuman" />
               <CardContent>
@@ -90,7 +105,7 @@ function Home() {
           </Stack>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

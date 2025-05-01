@@ -7,9 +7,11 @@ import './styles/App.scss';
 export default function App() {
   return (
     <Fragment>
-      <Container component="main" maxWidth="false">
-        <Layout />
-      </Container>
+      <CssBaseline>
+        <Container component="main" maxWidth="false">
+          <Layout />
+        </Container>
+      </CssBaseline>
     </Fragment>
   );
 }

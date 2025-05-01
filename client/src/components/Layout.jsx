@@ -7,6 +7,7 @@ import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
+import AlbumPage from './AlbumPage.jsx';
 
 export default function Layout() {
   return (
@@ -27,7 +28,7 @@ export default function Layout() {
           }}
         />
 
-        <Box sx={{ flexGrow: 1 }}>
+        <Box className="mainContainer" sx={{ flexGrow: 1 }}>
           <Grid container>
             <Grid size={12}>
               <main>
@@ -35,6 +36,7 @@ export default function Layout() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<LoginForm />} />
                   <Route path="/register" element={<RegisterForm />} />
+                  <Route path="/album/:id" element={<AlbumPage />} />
                 </Routes>
               </main>
             </Grid>
