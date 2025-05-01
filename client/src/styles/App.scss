@@ -2,6 +2,17 @@
 @import './font';
 
 body {
+  background-color: #030303;
+  color: #fff;
+  .header-container {
+    a {
+      color: #707070;
+      text-decoration: none;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
   .albumCardCss {
     cursor: pointer;
     width: 264px;

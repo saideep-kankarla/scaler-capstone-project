@@ -13,13 +13,19 @@ export default function Layout() {
     <Fragment>
       <BrowserRouter>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container>
+          <Grid className="header-container" container>
             <Grid size={12}>
               <Header />
             </Grid>
           </Grid>
         </Box>
-        <Divider />
+        <Divider
+          sx={{
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'rgb(255 255 255 / 12%)',
+          }}
+        />
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container>

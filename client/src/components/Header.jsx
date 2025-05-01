@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Logo from '../assets/logo.png';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -14,14 +14,22 @@ const Header = () => {
           padding: 2,
         }}
       >
-        <a href="/">
+        <Link to="/">
           <img src={Logo} style={{ height: '34px' }} alt="Audiio Logo" />
-        </a>
+        </Link>
 
         <Stack direction="row" spacing={2}>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-          <Link to="/admin">Admin Login</Link>
+          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
+            <Link to="/login">Pricing</Link>
+          </Typography>
+
+          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
+            <Link to="/login">Login</Link>
+          </Typography>
+
+          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
+            <Link to="/admin">Admin</Link>
+          </Typography>
         </Stack>
       </Box>
     </Fragment>
