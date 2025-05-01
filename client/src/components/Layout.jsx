@@ -3,25 +3,31 @@ import { Box, Grid, Divider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Header.jsx';
-import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
+import AlbumPage from './AlbumPage.jsx';
 
 export default function Layout() {
   return (
     <Fragment>
       <BrowserRouter>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container>
+          <Grid className="header-container" container>
             <Grid size={12}>
               <Header />
             </Grid>
           </Grid>
         </Box>
-        <Divider />
+        <Divider
+          sx={{
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'rgb(255 255 255 / 12%)',
+          }}
+        />
 
-        <Box sx={{ flexGrow: 1 }}>
+        <Box className="mainContainer" sx={{ flexGrow: 1 }}>
           <Grid container>
             <Grid size={12}>
               <main>
@@ -29,6 +35,7 @@ export default function Layout() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<LoginForm />} />
                   <Route path="/register" element={<RegisterForm />} />
+                  <Route path="/album/:id" element={<AlbumPage />} />
                 </Routes>
               </main>
             </Grid>
@@ -36,13 +43,13 @@ export default function Layout() {
         </Box>
         <Divider />
 
-        <Box sx={{ flexGrow: 1 }}>
+        {/* <Box sx={{ flexGrow: 1 }}>
           <Grid container>
             <Grid size={12}>
               <Footer />
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
       </BrowserRouter>
     </Fragment>
   );
