@@ -29,6 +29,10 @@ body {
     width: 264px;
     max-width: 264px;
     height: auto;
+    &.withPlayer {
+      background-color: rgb(44, 40, 40);
+      margin: 10px 0;
+    }
   }
 
   .login-form {

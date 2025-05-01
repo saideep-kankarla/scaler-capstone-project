@@ -22,7 +22,7 @@ function Home() {
     <Fragment>
       <div>
         <Typography gutterBottom variant="h4">
-          <b>Albums for you</b>
+          <b>Top Albums</b>
         </Typography>
         <div>
           <Stack

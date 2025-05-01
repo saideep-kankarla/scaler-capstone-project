@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import {
   Box,
   Grid,
@@ -8,33 +8,68 @@ import {
   Typography,
 } from '@mui/material';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+import { AudioPlayer } from 'react-audio-play';
+
 import devara from '../assets/thumbs/devara1.jpg';
 
+import song1 from '../assets/mp3/hakee-333940.mp3';
+import song2 from '../assets/mp3/town-10169.mp3';
+
 function AlbumPage() {
+  const [currentSong, setCurrentSong] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const playerRef = useRef(null);
+
+  const handlePlayPause = (id, songName, mp3FilePath) => {
+    if (currentSong && currentSong.id === id) {
+      // Toggle play/pause
+      setIsPlaying(!isPlaying);
+      if (playerRef.current) {
+        if (!isPlaying) {
+          playerRef.current?.play();
+        } else {
+          playerRef.current?.pause();
+        }
+      }
+    } else {
+      // Play new song
+      setCurrentSong({
+        id,
+        songName,
+        mp3FilePath,
+      });
+      setIsPlaying(true);
+    }
+  };
+
   const songData = [
     {
       id: 1,
       songName: 'Fear Song',
       singers: 'Anirudh Ravichandran',
       duration: '3:45',
+      mp3FilePath: song1,
     },
     {
       id: 2,
       songName: 'Chuttamalle',
       singers: 'Shilpa Rao',
       duration: '4:10',
+      mp3FilePath: song2,
     },
     {
       id: 3,
       songName: 'Daavudi',
       singers: 'Nakash Aziz,Akasa',
       duration: '2:50',
+      mp3FilePath: song1,
     },
     {
-      id: 3,
+      id: 4,
       songName: 'Ayudha pooja',
       singers: 'Kaala Bhairava',
       duration: '2:50',
+      mp3FilePath: song1,
     },
   ];
 
@@ -46,7 +81,7 @@ function AlbumPage() {
             <Typography align="center" gutterBottom variant="subtitle1">
               <b>Anirudh Ravichandran</b>
             </Typography>
-            <Card className="albumCardCss">
+            <Card className="albumCardCss withPlayer">
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -55,10 +90,21 @@ function AlbumPage() {
                   alt="Devara"
                 />
               </CardActionArea>
+              {currentSong && (
+                <AudioPlayer
+                  ref={playerRef}
+                  autoPlay={isPlaying}
+                  src={currentSong.mp3FilePath}
+                  color="#cfcfcf"
+                  sliderColor="#94b9ff"
+                  backgroundColor="#2c2828"
+                />
+              )}
             </Card>
             <Typography align="center" gutterBottom variant="h5">
               <b>Devara - Telugu (Original Motion Picture Soundtrack)</b>
             </Typography>
+
             <Typography align="center" gutterBottom variant="subtitle1">
               4 Songs &bull; 15:00 &bull; 2024
             </Typography>
@@ -120,7 +166,17 @@ function AlbumPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    <PlayCircleFilledWhiteIcon sx={{ fontSize: 40 }} />
+                    <PlayCircleFilledWhiteIcon
+                      sx={{ fontSize: 40 }}
+                      key={song.id}
+                      onClick={() =>
+                        handlePlayPause(
+                          song.id,
+                          song.songName,
+                          song.mp3FilePath,
+                        )
+                      }
+                    />
                   </Grid>
                 </Grid>
               ))}
