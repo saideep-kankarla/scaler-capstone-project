@@ -66,10 +66,10 @@ const RegisterForm = () => {
           required
           fullWidth
           type="email"
-          id="emailId"
+          id="email"
           label="E-mail Id"
           helperText="Please enter a valid E-mail ID"
-          name="emailId"
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
