@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { Fragment } from 'react';
 import { Box, Grid, Divider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -8,27 +8,9 @@ import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
 import AlbumPage from './AlbumPage.jsx';
 
-const AuthContext = createContext();
-
 const Layout = () => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('audiioAuthtoken'));
-
-  const login = (token) => {
-    localStorage.setItem('audiioAuthtoken', token);
-    setToken(token);
-    // Fetch user data and update the user state
-    // fetchUserData(token).then((userData) => setUser(userData));
-  };
-
-  const logout = () => {
-    localStorage.removeItem('audiioAuthtoken');
-    setToken(null);
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <Fragment>
       <BrowserRouter>
         <Box sx={{ flexGrow: 1 }}>
           <Grid className="header-container" container>
@@ -61,7 +43,7 @@ const Layout = () => {
         </Box>
         <Divider />
       </BrowserRouter>
-    </AuthContext.Provider>
+    </Fragment>
   );
 };
 

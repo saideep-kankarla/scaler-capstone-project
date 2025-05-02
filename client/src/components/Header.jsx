@@ -1,18 +1,9 @@
 import { Fragment } from 'react';
 import Logo from '../assets/logo.png';
 import { Box, Stack, Typography } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem('audiioAuthtoken');
-    localStorage.removeItem('isAudiioUserLogged');
-
-    // Redirect to home page
-    navigate('/', { replace: true });
-  };
-
   return (
     <Fragment>
       <Box
@@ -42,9 +33,7 @@ const Header = () => {
             |
           </Typography>
           <Typography gutterBottom variant="button">
-            <a href="javascript:void(0)" onClick={handleLogout}>
-              Logout
-            </a>
+            <a href="#">Logout</a>
           </Typography>
         </Stack>
       </Box>
