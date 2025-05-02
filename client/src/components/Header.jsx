@@ -1,9 +1,18 @@
 import { Fragment } from 'react';
 import Logo from '../assets/logo.png';
 import { Box, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('audiioAuthtoken');
+    localStorage.removeItem('isAudiioUserLogged');
+
+    // Redirect to home page
+    navigate('/', { replace: true });
+  };
+
   return (
     <Fragment>
       <Box
@@ -19,16 +28,23 @@ const Header = () => {
         </Link>
 
         <Stack direction="row" spacing={2}>
-          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
+          <Typography gutterBottom variant="button">
             <Link to="/pricing">Pricing</Link>
           </Typography>
 
-          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
+          <Typography gutterBottom variant="button">
+            |
+          </Typography>
+          <Typography gutterBottom variant="button">
             <Link to="/login">Login</Link>
           </Typography>
-
-          <Typography gutterBottom variant="button" sx={{ display: 'block' }}>
-            <Link to="/admin">Admin</Link>
+          <Typography gutterBottom variant="button">
+            |
+          </Typography>
+          <Typography gutterBottom variant="button">
+            <a href="javascript:void(0)" onClick={handleLogout}>
+              Logout
+            </a>
           </Typography>
         </Stack>
       </Box>

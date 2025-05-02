@@ -4,16 +4,35 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Link } from 'react-router-dom';
 
-const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+import axios from 'axios';
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle login logic here
-    console.log('Username:', username, 'Password:', password);
+const LoginForm = () => {
+  const [email, setEmail] = useState('saideep.k@gmail.com');
+  const [password, setPassword] = useState('mygoal');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Handle login logic here
+      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+      const response = await axios.post(`${apiBaseUrl}/api/users/login`, {
+        email,
+        password,
+      });
+      console.log('Successfully authenticated', response, response.data);
+
+      const { status, token } = response.data;
+      if (status === 200) {
+        localStorage.setItem('audiioAuthtoken', token);
+      }
+    } catch (err) {
+      console.error('Failed login', err.status);
+    }
+
     // Reset form fields
-    setUsername('');
+    setEmail('');
     setPassword('');
   };
 
@@ -27,13 +46,12 @@ const LoginForm = () => {
           required
           fullWidth
           type="email"
-          id="username"
           label="E-mail Id"
           name="emailId"
           helperText="Please enter a valid E-mail ID"
           autoFocus
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           variant="standard"

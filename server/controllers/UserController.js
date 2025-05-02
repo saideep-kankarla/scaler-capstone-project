@@ -37,18 +37,27 @@ const register = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
+    console.log('Login Attempt..');
+
     const { email, password } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      console.log('[Login] Invalid credentials..');
+      return res
+        .status(401)
+        .json({ status: 401, message: 'Invalid credentials' });
     }
 
     // Check if password is correct
     const passwordCompare = await bcrypt.compare(password, user.password);
     if (!passwordCompare) {
-      return res.status(401).json({ error: 'Login with proper credentials!' });
+      console.log('[Login] Invalid Password..');
+
+      return res
+        .status(401)
+        .json({ status: 401, error: 'Login with proper credentials!' });
     }
 
     // Generate JWT token
@@ -59,10 +68,11 @@ const login = async (req, res) => {
         expiresIn: process.env.JWT_EXPIRATION,
       }
     );
+    console.log('[Login] Authenticated with JWT..');
 
-    res.json({ success: 'Authenticated!', token });
+    res.json({ status: 200, success: 'Authenticated Successfully!', token });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 
