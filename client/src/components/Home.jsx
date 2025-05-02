@@ -17,7 +17,7 @@ import salaar from '../assets/thumbs/salaar.jpg';
 import kick from '../assets/thumbs/kick.jpg';
 import { Link } from 'react-router-dom';
 
-function Home() {
+const Home = () => {
   return (
     <Fragment>
       <div>
@@ -107,6 +107,6 @@ function Home() {
       </div>
     </Fragment>
   );
-}
+};
 
 export default Home;

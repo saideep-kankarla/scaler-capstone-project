@@ -8,7 +8,7 @@ import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
 import AlbumPage from './AlbumPage.jsx';
 
-export default function Layout() {
+const Layout = () => {
   return (
     <Fragment>
       <BrowserRouter>
@@ -53,4 +53,6 @@ export default function Layout() {
       </BrowserRouter>
     </Fragment>
   );
-}
+};
+
+export default Layout;

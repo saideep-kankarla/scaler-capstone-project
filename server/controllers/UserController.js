@@ -1,6 +1,7 @@
 // controllers/AuthController.js
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
   try {
@@ -13,7 +14,8 @@ const register = async (req, res) => {
     }
 
     // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create new user
     const user = new User({
@@ -33,5 +35,35 @@ const register = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-module.exports = { register };
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Check if password is correct
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    if (!passwordCompare) {
+      return res.status(401).json({ error: 'Login with proper credentials!' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: process.env.JWT_EXPIRATION,
+      }
+    );
+
+    res.json({ success: 'Authenticated!', token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { register, login };

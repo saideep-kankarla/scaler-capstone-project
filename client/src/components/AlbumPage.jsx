@@ -15,7 +15,7 @@ import devara from '../assets/thumbs/devara1.jpg';
 import song1 from '../assets/mp3/hakee-333940.mp3';
 import song2 from '../assets/mp3/town-10169.mp3';
 
-function AlbumPage() {
+const AlbumPage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
@@ -186,6 +186,6 @@ function AlbumPage() {
       </Box>
     </div>
   );
-}
+};
 
 export default AlbumPage;

@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const connectDB = require('./db');
 
 const userRoutes = require('./routes/UserRoutes');
+const premiumRoutes = require('./routes/premiumRoutes');
 
 const app = express();
 
@@ -19,7 +20,8 @@ app.use((err, req, res, next) => {
 });
 
 // user routes
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/users', premiumRoutes);
 
 app.use('/', (req, res) => {
   res.send('Welcome to audiio app server!');
