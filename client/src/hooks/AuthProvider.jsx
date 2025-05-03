@@ -4,29 +4,14 @@ import { useContext, createContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(
-    localStorage.getItem('audiioAuthtoken') || null,
-  );
-
-  // useEffect(() => {
-  //   if (token) {
-  //     axios
-  //       .get('/api/verify-token', {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         setUser(response.data.user);
-  //       })
-  //       .catch((err) => {
-  //         localStorage.removeItem('audiioAuthtoken');
-  //         setToken(null);
-  //         console.error('Failed token verification', err.status);
-  //       });
-  //   }
-  // }, [token]);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('audiiouser');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  const [token, setToken] = useState(() => {
+    const storedToken = localStorage.getItem('audiiotoken');
+    return storedToken;
+  });
 
   // Auto logout after login
   useEffect(() => {
@@ -39,9 +24,18 @@ const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('audiiouser', JSON.stringify(user.name));
+    } else {
+      localStorage.removeItem('audiiouser');
+    }
+  }, [user]);
+
   const login = async (user) => {
     try {
       localStorage.setItem('audiioAuthtoken', user.token);
+
       setUser(user);
       setToken(user.token);
     } catch (err) {

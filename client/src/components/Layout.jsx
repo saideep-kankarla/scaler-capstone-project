@@ -7,6 +7,7 @@ import Home from './Home.jsx';
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
 import AlbumPage from './AlbumPage.jsx';
+import PremiumPage from './PremiumPage.jsx';
 
 const Layout = () => {
   return (
@@ -37,6 +38,7 @@ const Layout = () => {
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/album/:id" element={<AlbumPage />} />
+                    <Route path="/premium" element={<PremiumPage />} />
                   </Routes>
                 </main>
               </Grid>

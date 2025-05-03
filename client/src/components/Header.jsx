@@ -18,16 +18,17 @@ import { useAuth } from '../hooks/AuthProvider';
 import { deepOrange } from '@mui/material/colors';
 import { PersonOutline, CardMembership, Logout } from '@mui/icons-material';
 const Header = () => {
+  const auth = useAuth();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const auth = useAuth();
-
   const initials = auth.user?.name?.charAt(0).toUpperCase();
 
   return (
@@ -45,7 +46,7 @@ const Header = () => {
         </Link>
 
         <Stack direction="row" spacing={2}>
-          {auth.user ? (
+          {auth && auth.user ? (
             <Fragment>
               <Tooltip title="Account settings">
                 <IconButton
@@ -65,9 +66,11 @@ const Header = () => {
               </Tooltip>
             </Fragment>
           ) : (
-            <Typography gutterBottom variant="button">
-              <Link to="/login">Login</Link>
-            </Typography>
+            <Fragment>
+              <Typography gutterBottom variant="button">
+                <Link to="/login">Login</Link>
+              </Typography>
+            </Fragment>
           )}
         </Stack>
       </Box>
@@ -110,24 +113,25 @@ const Header = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonOutline fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="My Account" />
-        </MenuItem>
+        <Link to="/profile">
+          <MenuItem>
+            <ListItemIcon>
+              <PersonOutline fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="My Account" />
+          </MenuItem>
+        </Link>
         {!auth.premiumSubscribed ? (
           <div style={{ padding: '6px 0' }}>
             <Divider />
-            <MenuItem
-              sx={{ width: '100%', textAlign: 'left' }}
-              onClick={handleClose}
-            >
-              <ListItemIcon>
-                <CardMembership fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Get Premium" />
-            </MenuItem>
+            <Link to="/premium">
+              <MenuItem sx={{ width: '100%', textAlign: 'left' }}>
+                <ListItemIcon>
+                  <CardMembership fontSize="small" />
+                </ListItemIcon>
+                <ListItemText primary="Get Premium" />
+              </MenuItem>
+            </Link>
           </div>
         ) : (
           ''
