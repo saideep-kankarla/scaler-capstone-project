@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Snackbar, Alert } from '@mui/material';
 import axios from '../utils/axios-config';
 
 import LoginIcon from '@mui/icons-material/Login';
@@ -12,6 +12,16 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState('saideep.k@gmail.com');
   const [password, setPassword] = useState('mygoal');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('you are on register form');
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const auth = useAuth();
 
@@ -34,7 +44,9 @@ const LoginForm = () => {
         navigate('/');
       }
     } catch (err) {
-      console.error('Failed login', err.status);
+      console.error('Failed login', err);
+      setMessage(err.response.data.error);
+      setOpen(true);
     }
 
     // Reset form fields
@@ -93,6 +105,21 @@ const LoginForm = () => {
           </Button>
         </Link>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="info"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

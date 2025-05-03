@@ -54,7 +54,7 @@ const RegisterForm = () => {
       }
     } catch (err) {
       console.error('Failed user save', err.status);
-      setMessage(err.message);
+      setMessage(err.response.data.error);
       setOpen(true);
     }
     // Reset form fields

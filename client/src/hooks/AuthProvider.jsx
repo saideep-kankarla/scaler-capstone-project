@@ -4,14 +4,8 @@ import { useContext, createContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('audiiouser');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
-  const [token, setToken] = useState(() => {
-    const storedToken = localStorage.getItem('audiiotoken');
-    return storedToken;
-  });
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   // Auto logout after login
   useEffect(() => {

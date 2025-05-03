@@ -16,11 +16,12 @@ import kgf from '../assets/thumbs/kgf1.jpg';
 import salaar from '../assets/thumbs/salaar.jpg';
 import kick from '../assets/thumbs/kick.jpg';
 import { Link } from 'react-router-dom';
+import { Padding } from '@mui/icons-material';
 
 const Home = () => {
   return (
     <Fragment>
-      <div>
+      <div style={{ padding: '0' }}>
         <Typography gutterBottom variant="h4">
           <b>Top Albums</b>
         </Typography>

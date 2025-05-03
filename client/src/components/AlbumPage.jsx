@@ -76,7 +76,7 @@ const AlbumPage = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid className="albumContainer" container>
+        <Grid className="albumContainer" size={12} container>
           <Grid className="album-info-container" size={5}>
             <Typography align="center" gutterBottom variant="subtitle1">
               <b>Anirudh Ravichandran</b>
@@ -90,16 +90,6 @@ const AlbumPage = () => {
                   alt="Devara"
                 />
               </CardActionArea>
-              {currentSong && (
-                <AudioPlayer
-                  ref={playerRef}
-                  autoPlay={isPlaying}
-                  src={currentSong.mp3FilePath}
-                  color="#cfcfcf"
-                  sliderColor="#94b9ff"
-                  backgroundColor="#2c2828"
-                />
-              )}
             </Card>
             <Typography align="center" gutterBottom variant="h5">
               <b>Devara - Telugu (Original Motion Picture Soundtrack)</b>
@@ -181,6 +171,23 @@ const AlbumPage = () => {
                 </Grid>
               ))}
             </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container size={12}>
+          <Grid className="playerContainer" size={12}>
+            {currentSong && (
+              <AudioPlayer
+                className="playerBox"
+                ref={playerRef}
+                autoPlay={isPlaying}
+                src={currentSong.mp3FilePath}
+                color="#cfcfcf"
+                sliderColor="#94b9ff"
+                backgroundColor="#2c2828"
+              />
+            )}
           </Grid>
         </Grid>
       </Box>

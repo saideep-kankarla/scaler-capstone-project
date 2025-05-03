@@ -47,7 +47,7 @@ const Header = () => {
 
         <Stack direction="row" spacing={2}>
           {auth && auth?.user ? (
-            <Fragment>
+            <Box>
               <Tooltip title="Account settings">
                 <IconButton
                   onClick={handleClick}
@@ -64,7 +64,7 @@ const Header = () => {
                   </Avatar>
                 </IconButton>
               </Tooltip>
-            </Fragment>
+            </Box>
           ) : (
             <Fragment>
               <Typography gutterBottom variant="button">

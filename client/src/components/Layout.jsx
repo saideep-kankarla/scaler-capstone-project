@@ -31,7 +31,7 @@ const Layout = () => {
             }}
           />
 
-          <Box className="mainContainer">
+          <Box className="mainAreaContainer">
             <Grid container>
               <Grid size={12}>
                 <main>

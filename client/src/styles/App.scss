@@ -4,49 +4,62 @@
 body {
   background-color: #030303 !important;
   color: #fff !important;
-  .header-container {
-    a {
-      color: #707070;
-      text-decoration: none;
-      &:hover {
-        color: #fff;
+  .mainvContainer {
+    padding: 0;
+    .header-container {
+      a {
+        color: #707070;
+        text-decoration: none;
+        &:hover {
+          color: #fff;
+        }
       }
     }
-  }
-  .albumContainer {
-    .album-info-container {
-      width: 300px;
+    .albumContainer {
+      .album-info-container {
+        width: 300px;
+        margin: 10px auto;
+      }
+    }
+    .mainAreaContainer {
+      padding: 20px 30px;
       margin: 0 auto;
     }
-  }
-  .mainContainer {
-    padding: 20px;
-    margin: 0 auto;
-  }
 
-  .albumCardCss {
-    cursor: pointer;
-    width: 264px;
-    max-width: 264px;
-    height: auto;
-    &.withPlayer {
-      background-color: rgb(44, 40, 40);
-      margin: 10px 0;
+    .albumCardCss {
+      cursor: pointer;
+      width: 264px;
+      max-width: 264px;
+      height: auto;
+      &.withPlayer {
+        background-color: rgb(44, 40, 40);
+        margin: 10px 0;
+      }
     }
-  }
 
-  .login-form {
-    border: 2px solid #ccc;
-    margin: 50px auto;
-    width: 500px;
-    min-height: 300px;
-    padding: 20px 20px 50px;
-    background-color: #fff;
-    border-radius: 10px;
-    h3 {
-      text-align: center;
-      font-size: 24px;
-      color: #000;
+    .login-form {
+      border: 2px solid #ccc;
+      margin: 50px auto;
+      width: 500px;
+      min-height: 300px;
+      padding: 20px 20px 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      h3 {
+        text-align: center;
+        font-size: 24px;
+        color: #000;
+      }
+    }
+
+    .playerContainer {
+      position: absolute;
+      bottom: 0;
+      left: 0px;
+      .playerBox {
+        max-width: 100%;
+        border-radius: 0;
+      }
     }
   }
 }

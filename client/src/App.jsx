@@ -8,7 +8,7 @@ export default function App() {
   return (
     <Fragment>
       <CssBaseline>
-        <Container component="main" maxWidth="false">
+        <Container className="mainvContainer" component="main" maxWidth="false">
           <Layout />
         </Container>
       </CssBaseline>
