@@ -129,7 +129,7 @@ const Header = () => {
                 <ListItemIcon>
                   <CardMembership fontSize="small" />
                 </ListItemIcon>
-                <ListItemText primary="Get Premium" />
+                <ListItemText primary="Premium Albums" />
               </MenuItem>
             </Link>
           </div>

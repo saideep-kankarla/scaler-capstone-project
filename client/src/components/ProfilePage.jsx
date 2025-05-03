@@ -1,49 +1,95 @@
-import { Button, Stack, Typography, Paper, Divider } from '@mui/material';
+import { useState } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Link,
+  useLocation,
+} from 'react-router-dom';
+
+import {
+  Box,
+  Stack,
+  Typography,
+  Paper,
+  Divider,
+  Grid,
+  List,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 const ProfilePage = () => {
   const navigate = useNavigate();
 
   const auth = useAuth();
 
-  console.log('sasa', auth?.user);
+  const location = useLocation();
 
   if (auth?.user === null) {
     navigate('/login');
   }
 
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <>
-      {auth && auth?.user ? (
+      {auth && auth?.user?.name ? (
         <div>
           <Stack direction="row">
-            <Paper variant="elevation" elevation={24} className="profileBox">
+            <Paper
+              variant="elevation"
+              elevation={24}
+              className="profileContainer"
+            >
               <Typography color="textPrimary" gutterBottom variant="h5">
                 Account Details Of {auth?.user?.name}
               </Typography>
               <Divider />
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid className="profileGrids" container size={12}>
+                  <Grid className="album-info-container" size={3}>
+                    <List component="nav" aria-label="secondary mailbox folder">
+                      <Link to="info" state={{ from: location.pathname }}>
+                        <ListItemButton
+                          selected={selectedIndex === 1}
+                          onClick={(event) => handleListItemClick(event, 1)}
+                        >
+                          <ListItemText primary="Profile Info" />
+                        </ListItemButton>
+                      </Link>
 
-              <Typography gutterBottom variant="subtitle1">
-                <p>Full Name : {auth?.user?.name}</p>
-                <p>Primary E-mail : {auth?.user?.email}</p>
-                <p>Contact Number : {auth?.user?.phone}</p>
-                <p>Member Since : {auth?.user?.createdAt}</p>
-                <p>
-                  Premium Membership :{' '}
-                  {String(auth?.user?.premiumSubscribed).toLocaleUpperCase()}
-                  <br />
-                  <br />
-                  <Button
-                    variant="contained"
-                    color="success"
-                    size="large"
-                    endIcon={<WorkspacePremiumIcon />}
-                  >
-                    Get Premium Membership
-                  </Button>
-                </p>
-              </Typography>
+                      <Divider />
+                      <Link to="usersCrud" state={{ from: location.pathname }}>
+                        <ListItemButton
+                          selected={selectedIndex === 1}
+                          onClick={(event) => handleListItemClick(event, 2)}
+                        >
+                          <ListItemText primary="Users" />
+                        </ListItemButton>
+                      </Link>
+
+                      <Link to="albumsCrud" state={{ from: location.pathname }}>
+                        <ListItemButton
+                          selected={selectedIndex === 1}
+                          onClick={(event) => handleListItemClick(event, 3)}
+                        >
+                          <ListItemText primary="Albums" />
+                        </ListItemButton>
+                      </Link>
+                    </List>
+                  </Grid>
+                  <Grid className="album-info-container" size={9}>
+                    <Outlet />
+                  </Grid>
+                </Grid>
+              </Box>
             </Paper>
           </Stack>
         </div>
