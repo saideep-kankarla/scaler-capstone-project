@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Alert, TextField, Button, Snackbar } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from '../utils/axios-config';
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
-
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -53,7 +51,6 @@ const RegisterForm = () => {
       if (status === 201) {
         setOpen(true);
         setMessage(response.data.message);
-        // navigate('/login');
       }
     } catch (err) {
       console.error('Failed user save', err.status);
