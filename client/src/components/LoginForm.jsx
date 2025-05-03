@@ -4,10 +4,12 @@ import axios from '../utils/axios-config';
 
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('saideep.k@gmail.com');
   const [password, setPassword] = useState('mygoal');
 
@@ -29,6 +31,7 @@ const LoginForm = () => {
       const { status, user } = response.data;
       if (status === 200) {
         auth.login(user);
+        navigate('/');
       }
     } catch (err) {
       console.error('Failed login', err.status);

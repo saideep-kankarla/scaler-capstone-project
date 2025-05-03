@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from '../utils/axios-config';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     // Handle login logic here
     console.log(
       'Full name:',
@@ -22,6 +26,26 @@ const RegisterForm = () => {
       'Password:',
       password,
     );
+
+    try {
+      // Handle login logic here
+      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+      const response = await axios.post(`${apiBaseUrl}/api/users/register`, {
+        name,
+        phone,
+        email,
+        password,
+      });
+      console.log('Successfully Registered', response.data);
+
+      const { status } = response.data;
+      if (status === 201) {
+        navigate('/login');
+      }
+    } catch (err) {
+      console.error('Failed user save', err.status);
+    }
     // Reset form fields
     setName('');
     setPhone('');

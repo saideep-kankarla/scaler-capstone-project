@@ -10,7 +10,9 @@ const register = async (req, res) => {
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res
+        .status(400)
+        .json({ status: 400, message: 'User already exists' });
     }
 
     // Hash password
@@ -30,9 +32,9 @@ const register = async (req, res) => {
     // Save user to database
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ status: 201, message: 'User created successfully' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 const login = async (req, res) => {
