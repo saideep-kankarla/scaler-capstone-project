@@ -29,7 +29,7 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const initials = auth.user?.name?.charAt(0).toUpperCase();
+  const initials = auth?.user?.name?.charAt(0).toUpperCase();
 
   return (
     <Fragment>
@@ -46,7 +46,7 @@ const Header = () => {
         </Link>
 
         <Stack direction="row" spacing={2}>
-          {auth && auth.user ? (
+          {auth && auth?.user ? (
             <Fragment>
               <Tooltip title="Account settings">
                 <IconButton
@@ -79,7 +79,7 @@ const Header = () => {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        sx={{ width: 530 }}
+        sx={{ width: 500 }}
         slotProps={{
           paper: {
             elevation: 0,
@@ -137,7 +137,7 @@ const Header = () => {
           ''
         )}
         <Divider />
-        <MenuItem onClick={auth.logout}>
+        <MenuItem onClick={auth?.logout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

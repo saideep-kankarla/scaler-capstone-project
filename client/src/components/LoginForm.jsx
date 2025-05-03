@@ -30,7 +30,7 @@ const LoginForm = () => {
 
       const { status, user } = response.data;
       if (status === 200) {
-        auth.login(user);
+        auth?.login(user);
         navigate('/');
       }
     } catch (err) {
