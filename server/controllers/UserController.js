@@ -91,4 +91,30 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+      .select('name email phone role premiumSubscribed createdAt')
+      .exec();
+
+    res.status(200).json({ status: 200, message: 'Success', users });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    console.log('Inside delete user');
+
+    const user = await User.findByIdAndDelete(userId);
+    console.log(`Deleted user: ${user}`);
+
+    res.status(204).json({ status: 200, message: 'Deleted Successfully' });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+module.exports = { register, login, getAllUsers, deleteUser };
