@@ -121,7 +121,7 @@ const Header = () => {
             <ListItemText primary="My Account" />
           </MenuItem>
         </Link>
-        {!auth.premiumSubscribed ? (
+        {auth && !auth?.user?.premiumSubscribed ? (
           <div style={{ padding: '6px 0' }}>
             <Divider />
             <Link to="/premium">

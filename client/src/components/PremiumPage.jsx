@@ -6,7 +6,7 @@ const PremiumPage = () => {
 
   return (
     <>
-      {auth && auth.premiumSubscribed ? (
+      {auth && !auth?.user?.premiumSubscribed ? (
         <div>You are a premium user</div>
       ) : (
         <div>
