@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { Alert, TextField, Button, Snackbar } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../utils/axios-config';
@@ -11,6 +11,16 @@ const RegisterForm = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('you are on register form');
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,10 +51,14 @@ const RegisterForm = () => {
 
       const { status } = response.data;
       if (status === 201) {
-        navigate('/login');
+        setOpen(true);
+        setMessage(response.data.message);
+        // navigate('/login');
       }
     } catch (err) {
       console.error('Failed user save', err.status);
+      setMessage(err.message);
+      setOpen(true);
     }
     // Reset form fields
     setName('');
@@ -126,6 +140,21 @@ const RegisterForm = () => {
           </Button>
         </Link>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="info"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
