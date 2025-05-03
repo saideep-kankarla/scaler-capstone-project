@@ -1,11 +1,21 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const connectDB = require('./db');
 
 const userRoutes = require('./routes/UserRoutes');
+const premiumRoutes = require('./routes/premiumRoutes');
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'http://localhost:5174'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 app.use(helmet());
 
@@ -18,8 +28,11 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke on audiio app server !');
 });
 
+// app.use(verifyToken);
+
 // user routes
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/premium', premiumRoutes);
 
 app.use('/', (req, res) => {
   res.send('Welcome to audiio app server!');

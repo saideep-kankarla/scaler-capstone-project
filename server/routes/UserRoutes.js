@@ -1,14 +1,22 @@
 const router = require('express').Router();
-const { register } = require('../controllers/UserController');
+const {
+  login,
+  register,
+  getAllUsers,
+  deleteUser,
+} = require('../controllers/UserController');
+
+const verifyToken = require('../middlewares/verifyJwt');
 
 //Get routes
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.send('Welcome to user get call!');
 });
+router.get('/allUsers', verifyToken, getAllUsers);
 
 //Post routes
-// routes/auth.js
-
+router.post('/login', login);
 router.post('/register', register);
+router.post('/deleteUser', verifyToken, deleteUser);
 
 module.exports = router;

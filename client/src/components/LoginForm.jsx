@@ -1,19 +1,56 @@
-import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { useState } from 'react';
+import { TextField, Button, Snackbar, Alert } from '@mui/material';
+import axios from '../utils/axios-config';
+
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthProvider';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle login logic here
-    console.log('Username:', username, 'Password:', password);
+  const [email, setEmail] = useState('saideep.k@gmail.com');
+  const [password, setPassword] = useState('mygoal');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('you are on register form');
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const auth = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Handle login logic here
+      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+      const response = await axios.post(`${apiBaseUrl}/api/users/login`, {
+        email,
+        password,
+      });
+      console.log('Successfully authenticated', response.data);
+
+      const { status, user } = response.data;
+      if (status === 200) {
+        auth?.login(user);
+        navigate('/');
+      }
+    } catch (err) {
+      console.error('Failed login', err);
+      setMessage(err.response.data.error);
+      setOpen(true);
+    }
+
     // Reset form fields
-    setUsername('');
+    setEmail('');
     setPassword('');
   };
 
@@ -27,13 +64,12 @@ const LoginForm = () => {
           required
           fullWidth
           type="email"
-          id="username"
           label="E-mail Id"
           name="emailId"
           helperText="Please enter a valid E-mail ID"
           autoFocus
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           variant="standard"
@@ -69,6 +105,21 @@ const LoginForm = () => {
           </Button>
         </Link>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="info"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

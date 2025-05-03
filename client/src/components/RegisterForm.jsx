@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { Alert, TextField, Button, Snackbar } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Link } from 'react-router-dom';
+import axios from '../utils/axios-config';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('you are on register form');
 
-  const handleSubmit = (event) => {
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     // Handle login logic here
     console.log(
       'Full name:',
@@ -22,6 +34,29 @@ const RegisterForm = () => {
       'Password:',
       password,
     );
+
+    try {
+      // Handle login logic here
+      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+      const response = await axios.post(`${apiBaseUrl}/api/users/register`, {
+        name,
+        phone,
+        email,
+        password,
+      });
+      console.log('Successfully Registered', response.data);
+
+      const { status } = response.data;
+      if (status === 201) {
+        setOpen(true);
+        setMessage(response.data.message);
+      }
+    } catch (err) {
+      console.error('Failed user save', err.status);
+      setMessage(err.response.data.error);
+      setOpen(true);
+    }
     // Reset form fields
     setName('');
     setPhone('');
@@ -102,6 +137,21 @@ const RegisterForm = () => {
           </Button>
         </Link>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="info"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

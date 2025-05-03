@@ -1,56 +1,65 @@
-import { Fragment } from 'react';
 import { Box, Grid, Divider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '../hooks/AuthProvider';
 
 import Header from './Header.jsx';
 import Home from './Home.jsx';
 import LoginForm from './LoginForm.jsx';
 import RegisterForm from './RegisterForm.jsx';
 import AlbumPage from './AlbumPage.jsx';
+import ProfilePage from './ProfilePage.jsx';
+import ProfileInfo from './ProfileInfo.jsx';
+import UsersCrud from './UsersCrud.jsx';
+import AlbumsCrud from './AlbumsCrud.jsx';
 
-export default function Layout() {
+import PremiumPage from './PremiumPage.jsx';
+
+const Layout = () => {
   return (
-    <Fragment>
+    <div className="App">
       <BrowserRouter>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid className="header-container" container>
-            <Grid size={12}>
-              <Header />
+        <AuthProvider>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid className="header-container" container>
+              <Grid size={12}>
+                <Header />
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        <Divider
-          sx={{
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'rgb(255 255 255 / 12%)',
-          }}
-        />
+          </Box>
+          <Divider
+            sx={{
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: 'rgb(255 255 255 / 12%)',
+            }}
+          />
 
-        <Box className="mainContainer" sx={{ flexGrow: 1 }}>
-          <Grid container>
-            <Grid size={12}>
-              <main>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<LoginForm />} />
-                  <Route path="/register" element={<RegisterForm />} />
-                  <Route path="/album/:id" element={<AlbumPage />} />
-                </Routes>
-              </main>
-            </Grid>
-          </Grid>
-        </Box>
-        <Divider />
+          <Box className="mainAreaContainer">
+            <Grid container>
+              <Grid size={12}>
+                <main>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/register" element={<RegisterForm />} />
+                    <Route path="/album/:id" element={<AlbumPage />} />
+                    <Route path="/profile" element={<ProfilePage />}>
+                      <Route path="info" element={<ProfileInfo />} />
+                      <Route path="usersCrud" element={<UsersCrud />} />
+                      <Route path="albumsCrud" element={<AlbumsCrud />} />
+                    </Route>
 
-        {/* <Box sx={{ flexGrow: 1 }}>
-          <Grid container>
-            <Grid size={12}>
-              <Footer />
+                    <Route path="/premium" element={<PremiumPage />} />
+                  </Routes>
+                </main>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box> */}
+          </Box>
+          <Divider />
+        </AuthProvider>
       </BrowserRouter>
-    </Fragment>
+    </div>
   );
-}
+};
+
+export default Layout;
