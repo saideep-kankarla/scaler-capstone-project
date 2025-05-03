@@ -70,7 +70,17 @@ const login = async (req, res) => {
     );
     console.log('[Login] Authenticated with JWT..');
 
-    res.json({ status: 200, success: 'Authenticated Successfully!', token });
+    res.json({
+      status: 200,
+      success: 'Authenticated Successfully!',
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        premiumSubscribed: user.premiumSubscribed,
+        token,
+      },
+    });
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }

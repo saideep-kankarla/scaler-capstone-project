@@ -28,6 +28,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke on audiio app server !');
 });
 
+// app.use(verifyToken);
+
 // user routes
 app.use('/api/users', userRoutes);
 app.use('/api/premium', premiumRoutes);

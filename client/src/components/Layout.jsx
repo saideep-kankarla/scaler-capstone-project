@@ -1,7 +1,6 @@
-import { Fragment } from 'react';
 import { Box, Grid, Divider } from '@mui/material';
-import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
-import AuthProvider from '../hooks/AuthProvider';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '../hooks/AuthProvider';
 
 import Header from './Header.jsx';
 import Home from './Home.jsx';
@@ -29,7 +28,7 @@ const Layout = () => {
             }}
           />
 
-          <Box className="mainContainer" sx={{ flexGrow: 1 }}>
+          <Box className="mainContainer">
             <Grid container>
               <Grid size={12}>
                 <main>

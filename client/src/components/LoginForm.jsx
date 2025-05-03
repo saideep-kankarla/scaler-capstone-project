@@ -24,12 +24,11 @@ const LoginForm = () => {
         email,
         password,
       });
-      console.log('Successfully authenticated', response, response.data);
+      console.log('Successfully authenticated', response.data);
 
-      const { status, token } = response.data;
+      const { status, user } = response.data;
       if (status === 200) {
-        // localStorage.setItem('audiioAuthtoken', token);
-        auth.login(token);
+        auth.login(user);
       }
     } catch (err) {
       console.error('Failed login', err.status);
