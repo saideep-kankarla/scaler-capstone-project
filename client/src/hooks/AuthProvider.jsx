@@ -10,24 +10,9 @@ const AuthProvider = ({ children }) => {
   );
   const navigate = useNavigate();
 
-  const loginAction = async (data) => {
+  const loginAction = async (token) => {
     try {
-      const response = await fetch('your-api-endpoint/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const res = await response.json();
-      if (res.data) {
-        setUser(res.data.user);
-        setToken(res.token);
-        localStorage.setItem('site', res.token);
-        navigate('/dashboard');
-        return;
-      }
-      throw new Error(res.message);
+      localStorage.setItem('audiioAuthtoken', token);
     } catch (err) {
       console.error(err);
     }

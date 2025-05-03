@@ -1,16 +1,17 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import axios from '../utils/axios-config';
 
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../App.jsx';
+import { useAuth } from '../hooks/AuthProvider';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('saideep.k@gmail.com');
   const [password, setPassword] = useState('mygoal');
-  const { login } = useContext(AuthContext);
+
+  const auth = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const LoginForm = () => {
       const { status, token } = response.data;
       if (status === 200) {
         // localStorage.setItem('audiioAuthtoken', token);
-        login(token);
+        auth.login(token);
       }
     } catch (err) {
       console.error('Failed login', err.status);

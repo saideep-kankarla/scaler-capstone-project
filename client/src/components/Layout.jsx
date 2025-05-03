@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Box, Grid, Divider } from '@mui/material';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
+import AuthProvider from '../hooks/AuthProvider';
 
 import Header from './Header.jsx';
 import Home from './Home.jsx';
@@ -10,40 +11,42 @@ import AlbumPage from './AlbumPage.jsx';
 
 const Layout = () => {
   return (
-    <Fragment>
+    <div className="App">
       <BrowserRouter>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid className="header-container" container>
-            <Grid size={12}>
-              <Header />
+        <AuthProvider>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid className="header-container" container>
+              <Grid size={12}>
+                <Header />
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        <Divider
-          sx={{
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'rgb(255 255 255 / 12%)',
-          }}
-        />
+          </Box>
+          <Divider
+            sx={{
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: 'rgb(255 255 255 / 12%)',
+            }}
+          />
 
-        <Box className="mainContainer" sx={{ flexGrow: 1 }}>
-          <Grid container>
-            <Grid size={12}>
-              <main>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<LoginForm />} />
-                  <Route path="/register" element={<RegisterForm />} />
-                  <Route path="/album/:id" element={<AlbumPage />} />
-                </Routes>
-              </main>
+          <Box className="mainContainer" sx={{ flexGrow: 1 }}>
+            <Grid container>
+              <Grid size={12}>
+                <main>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/register" element={<RegisterForm />} />
+                    <Route path="/album/:id" element={<AlbumPage />} />
+                  </Routes>
+                </main>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        <Divider />
+          </Box>
+          <Divider />
+        </AuthProvider>
       </BrowserRouter>
-    </Fragment>
+    </div>
   );
 };
 
