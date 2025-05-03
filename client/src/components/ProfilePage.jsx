@@ -53,9 +53,9 @@ const ProfilePage = () => {
               </Typography>
               <Divider />
               <Box sx={{ flexGrow: 1 }}>
-                <Grid className="profileGrids" container size={12}>
-                  <Grid className="album-info-container" size={3}>
-                    <List component="nav" aria-label="secondary mailbox folder">
+                <Grid className="profileGrids" container spacing={4}>
+                  <Grid className="profileLeftSection" size={3}>
+                    <List component="nav">
                       <Link to="info" state={{ from: location.pathname }}>
                         <ListItemButton
                           selected={selectedIndex === 1}
@@ -85,7 +85,7 @@ const ProfilePage = () => {
                       </Link>
                     </List>
                   </Grid>
-                  <Grid className="album-info-container" size={9}>
+                  <Grid className="profileMainSection" size={9}>
                     <Outlet />
                   </Grid>
                 </Grid>
