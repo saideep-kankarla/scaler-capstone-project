@@ -65,8 +65,7 @@ body {
     .profileContainer {
       width: 100%;
       max-width: 90%;
-      height: 600px;
-      max-height: 600px;
+      min-height: 600px;
       margin: 0 auto;
       padding: 15px;
       .profileLeftSection {
@@ -79,6 +78,24 @@ body {
         h6 {
           p {
             margin: 10px 0;
+          }
+        }
+      }
+    }
+
+    .tableContainer {
+      thead {
+        background-color: #000;
+        opacity: 0.65;
+        tr {
+          th {
+            color: #fff;
+
+            span {
+              svg {
+                color: #fff;
+              }
+            }
           }
         }
       }

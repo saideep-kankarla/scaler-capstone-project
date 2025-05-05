@@ -1,3 +1,5 @@
+const path = require('path');
+
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -5,7 +7,7 @@ const cors = require('cors');
 const connectDB = require('./db');
 
 const userRoutes = require('./routes/UserRoutes');
-const premiumRoutes = require('./routes/premiumRoutes');
+const albumRoutes = require('./routes/AlbumRoutes');
 
 const app = express();
 
@@ -20,7 +22,8 @@ app.use(
 app.use(helmet());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.urlencoded({ extended: true })); // for URL-encoded bodies
 
 //error handling middleware
 app.use((err, req, res, next) => {
@@ -32,7 +35,7 @@ app.use((err, req, res, next) => {
 
 // user routes
 app.use('/api/users', userRoutes);
-app.use('/api/premium', premiumRoutes);
+app.use('/api/albums', albumRoutes);
 
 app.use('/', (req, res) => {
   res.send('Welcome to audiio app server!');

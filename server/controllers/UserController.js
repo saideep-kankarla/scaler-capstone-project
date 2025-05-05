@@ -93,7 +93,7 @@ const login = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find()
+    const users = await User.find({ role: 'user' })
       .select('name email phone role premiumSubscribed createdAt')
       .exec();
 
@@ -105,8 +105,10 @@ const getAllUsers = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { userId } = req.body;
-    console.log('Inside delete user');
+    console.log('testst', req.params.userId);
+
+    const userId = req.params.userId;
+    console.log('Inside delete user', userId);
 
     const user = await User.findByIdAndDelete(userId);
     console.log(`Deleted user: ${user}`);

@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  Link,
-  useLocation,
-} from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 import {
   Box,
@@ -66,21 +59,33 @@ const ProfilePage = () => {
                       </Link>
 
                       <Divider />
-                      <Link to="usersCrud" state={{ from: location.pathname }}>
+                      <Link to="usersTable" state={{ from: location.pathname }}>
                         <ListItemButton
-                          selected={selectedIndex === 1}
+                          selected={selectedIndex === 2}
                           onClick={(event) => handleListItemClick(event, 2)}
                         >
                           <ListItemText primary="Users" />
                         </ListItemButton>
                       </Link>
 
-                      <Link to="albumsCrud" state={{ from: location.pathname }}>
+                      {/* <Link to="addAlbum" state={{ from: location.pathname }}>
                         <ListItemButton
-                          selected={selectedIndex === 1}
+                          selected={selectedIndex === 3}
                           onClick={(event) => handleListItemClick(event, 3)}
                         >
-                          <ListItemText primary="Albums" />
+                          <ListItemText primary="Add Album" />
+                        </ListItemButton>
+                      </Link> */}
+
+                      <Link
+                        to="AlbumsTable"
+                        state={{ from: location.pathname }}
+                      >
+                        <ListItemButton
+                          selected={selectedIndex === 4}
+                          onClick={(event) => handleListItemClick(event, 4)}
+                        >
+                          <ListItemText primary="List Album(s)" />
                         </ListItemButton>
                       </Link>
                     </List>
