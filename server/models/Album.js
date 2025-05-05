@@ -1,33 +1,56 @@
 // models/User.js
 const mongoose = require('mongoose');
 
+const songSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: String, // format: "mm:ss"
+    required: true,
+  },
+  singerName: {
+    type: String,
+    required: true,
+  },
+  mp3Path: {
+    type: String,
+    required: true,
+  },
+});
+
 const albumSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
       unique: true,
     },
-    email: {
+    language: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true,
+      default: 'Telugu',
     },
-    password: {
+    composer: {
       type: String,
       required: true,
     },
-    role: {
+    description: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+      required: true,
     },
-    premiumSubscribed: {
+    releaseYear: {
+      type: Number,
+      min: 1900,
+      max: new Date().getFullYear() + 10,
+    },
+    poster: {
+      type: String,
+      required: true,
+    },
+    songs: [songSchema],
+    premium: {
       type: Boolean,
       default: 'false',
     },
@@ -39,4 +62,4 @@ const albumSchema = new mongoose.Schema(
 
 const Album = mongoose.model('Albums', albumSchema);
 
-module.exports = albumSchema;
+module.exports = Album;
