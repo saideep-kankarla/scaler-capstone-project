@@ -49,7 +49,6 @@ const AlbumForm = () => {
       { title: '', duration: '00:00', singerName: '', mp3File: null },
     ]);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -60,11 +59,19 @@ const AlbumForm = () => {
     formData.append('releaseYear', releaseYear);
     formData.append('premium', premium);
     formData.append('poster', poster);
-    songs.forEach((song, index) => {
-      formData.append(`songs[${index}][mp3File]`, song.mp3File);
-      formData.append(`songs[${index}][singerName]`, song.singerName);
-      formData.append(`songs[${index}][duration]`, song.duration);
-      formData.append(`songs[${index}][title]`, song.title);
+    formData.append(
+      'songsDetails',
+      JSON.stringify(
+        songs.map((song) => ({
+          title: song.title,
+          duration: song.duration,
+          singerName: song.singerName,
+        })),
+      ),
+    );
+
+    songs.forEach((song) => {
+      formData.append('songs', song.mp3File);
     });
 
     try {

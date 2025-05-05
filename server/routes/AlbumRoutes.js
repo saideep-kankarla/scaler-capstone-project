@@ -1,8 +1,11 @@
 // routes/albumRoutes.js
 const express = require('express');
 const router = express.Router();
-const albumController = require('../controllers/albumController');
+const albumController = require('../controllers/AlbumController');
 
+router.get('/testAlbum', (req, res) => {
+  res.send('Welcome to testAlbum call!');
+});
 router.post('/create', albumController.createAlbum);
 router.get('/getAll', albumController.getAllAlbums);
 router.get('/:id', albumController.getAlbumById);

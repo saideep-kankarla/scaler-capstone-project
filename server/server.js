@@ -22,8 +22,8 @@ app.use(
 app.use(helmet());
 
 app.use(express.json());
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.urlencoded({ extended: true })); // for URL-encoded bodies
 
 //error handling middleware
 app.use((err, req, res, next) => {

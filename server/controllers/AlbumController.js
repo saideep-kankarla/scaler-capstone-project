@@ -5,7 +5,6 @@ const uploadFiles = upload.fields([
   { name: 'poster', maxCount: 1 },
   { name: 'songs', maxCount: 10 },
 ]);
-
 exports.createAlbum = async (req, res) => {
   try {
     await new Promise((resolve, reject) => {
@@ -22,13 +21,41 @@ exports.createAlbum = async (req, res) => {
       description,
       releaseYear,
       premium,
-      singerName,
+      songsDetails,
     } = req.body;
+
+    if (
+      !name ||
+      !language ||
+      !composer ||
+      !description ||
+      !releaseYear ||
+      !songsDetails
+    ) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    if (!req.files.poster || !req.files.poster.length) {
+      return res.status(400).json({ message: 'Poster is required' });
+    }
+
+    if (!req.files.songs || !req.files.songs.length) {
+      return res.status(400).json({ message: 'At least one song is required' });
+    }
+
     const poster = req.files.poster[0].filename;
-    const songs = req.files.songs.map((song) => ({
-      title: song.originalname.split('.')[0],
-      duration: '00:00',
-      singerName,
+    const songsDetailsParsed = JSON.parse(songsDetails);
+
+    if (req.files.songs.length !== songsDetailsParsed.length) {
+      return res
+        .status(400)
+        .json({ message: 'Number of songs and song details do not match' });
+    }
+
+    const songs = req.files.songs.map((song, index) => ({
+      title: songsDetailsParsed[index].title,
+      duration: songsDetailsParsed[index].duration,
+      singerName: songsDetailsParsed[index].singerName,
       mp3Path: song.filename,
     }));
 
@@ -46,6 +73,7 @@ exports.createAlbum = async (req, res) => {
     await album.save();
     res.status(201).json(album);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
