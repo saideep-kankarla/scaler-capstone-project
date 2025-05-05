@@ -41,7 +41,7 @@ const albumSchema = new mongoose.Schema(
       required: true,
     },
     releaseYear: {
-      type: Number,
+      type: String,
       min: 1900,
       max: new Date().getFullYear() + 10,
     },

@@ -20,7 +20,7 @@ const AlbumForm = () => {
   const [premium, setPremium] = useState(false);
   const [poster, setPoster] = useState(null);
   const [songs, setSongs] = useState([
-    { title: '', singerName: '', mp3File: null },
+    { title: '', duration: '00:00', singerName: '', mp3File: null },
   ]);
   const [message, setMessage] = useState('');
 
@@ -44,7 +44,10 @@ const AlbumForm = () => {
   };
 
   const addMoreSong = () => {
-    setSongs([...songs, { title: '', singerName: '', mp3File: null }]);
+    setSongs([
+      ...songs,
+      { title: '', duration: '00:00', singerName: '', mp3File: null },
+    ]);
   };
 
   const handleSubmit = async (e) => {
@@ -60,6 +63,7 @@ const AlbumForm = () => {
     songs.forEach((song, index) => {
       formData.append(`songs[${index}][mp3File]`, song.mp3File);
       formData.append(`songs[${index}][singerName]`, song.singerName);
+      formData.append(`songs[${index}][duration]`, song.duration);
       formData.append(`songs[${index}][title]`, song.title);
     });
 
@@ -90,79 +94,83 @@ const AlbumForm = () => {
           </Typography>
 
           <form onSubmit={handleSubmit}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="name"
-                name="name"
-                label="Album Name"
-                variant="standard"
-                margin="normal"
-                fullWidth
-                helperText="Please enter a Album Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+            <Grid container spacing={5} size={12}>
+              <Grid item size={4}>
+                <TextField
+                  required
+                  id="name"
+                  name="name"
+                  label="Album Name"
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  helperText="Please enter a Album Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Grid>
+              <Grid item size={4}>
+                <TextField
+                  required
+                  id="language"
+                  name="language"
+                  label="Language"
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  helperText="Please select a language"
+                  autoComplete="family-name"
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                />
+              </Grid>
+              <Grid item size={4}>
+                <TextField
+                  required
+                  id="composer"
+                  name="composer"
+                  label="Composer"
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  helperText="Please enter composer name"
+                  value={composer}
+                  onChange={(e) => setComposer(e.target.value)}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="language"
-                name="language"
-                label="Language"
-                variant="standard"
-                margin="normal"
-                fullWidth
-                helperText="Please select a language"
-                autoComplete="family-name"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="composer"
-                name="composer"
-                label="Composer"
-                variant="standard"
-                margin="normal"
-                fullWidth
-                helperText="Please enter composer name"
-                value={composer}
-                onChange={(e) => setComposer(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="releaseYear"
-                name="releaseYear"
-                label="Release Year"
-                variant="standard"
-                margin="normal"
-                fullWidth
-                helperText="Please enter release year"
-                value={releaseYear}
-                onChange={(e) => setReleaseYear(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ marginBottom: 2 }}>
-              <TextField
-                required
-                id="description"
-                name="description"
-                label="Description"
-                variant="standard"
-                margin="normal"
-                fullWidth
-                helperText="Please enter Album description year"
-                multiline
-                rows={4}
-                autoComplete="given-name"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+
+            <Grid container spacing={5} size={12}>
+              <Grid item size={4}>
+                <TextField
+                  required
+                  id="releaseYear"
+                  name="releaseYear"
+                  label="Release Year"
+                  variant="standard"
+                  margin="normal"
+                  fullWidth
+                  helperText="Please enter release year"
+                  value={releaseYear}
+                  onChange={(e) => setReleaseYear(e.target.value)}
+                />
+              </Grid>
+              <Grid item size={8} xs={12} sx={{ marginBottom: 2 }}>
+                <TextField
+                  required
+                  id="description"
+                  name="description"
+                  label="Description"
+                  margin="normal"
+                  fullWidth
+                  helperText="Please enter Album description year"
+                  multiline
+                  rows={4}
+                  autoComplete="given-name"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </Grid>
             </Grid>
             <Grid container size={12} sx={{ marginBottom: 2 }}>
               <Grid size={3}>
@@ -189,55 +197,79 @@ const AlbumForm = () => {
             </Grid>
             <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
 
+            <Typography variant="h4" gutterBottom>
+              Add Song(s)
+              <Button
+                variant="contained"
+                sx={{ marginLeft: 15 }}
+                onClick={addMoreSong}
+              >
+                Add More
+              </Button>
+            </Typography>
+
             {songs.map((song, index) => (
               <Fragment key={index}>
                 <Grid item xs={12} sx={{ marginBottom: 2 }}>
-                  <Typography variant="h4" gutterBottom>
-                    Add Song(s)
-                  </Typography>
-                  <Typography variant="body1">Song {index + 1}:</Typography>
-                </Grid>
-                <Grid item xs={12} sx={{ marginBottom: 2 }}>
-                  <TextField
-                    required
-                    id={`title-${index}`}
-                    name="title"
-                    label="Title"
-                    fullWidth
-                    autoComplete="given-name"
-                    value={song.title}
-                    onChange={(e) => handleSongChange(e, index)}
-                  />
-                </Grid>
-                <Grid item xs={12} sx={{ marginBottom: 2 }}>
-                  <TextField
-                    required
-                    id={`singerName-${index}`}
-                    name="singerName"
-                    label="Singer Name"
-                    fullWidth
-                    autoComplete="given-name"
-                    value={song.singerName}
-                    onChange={(e) => handleSongChange(e, index)}
-                  />
-                </Grid>
-                <Grid item xs={12} sx={{ marginBottom: 2 }}>
-                  <Typography variant="body1">Song File:</Typography>
-                  <input
-                    accept="audio/*"
-                    id={`mp3File-${index}`}
-                    type="file"
-                    onChange={(e) => handleSongFileChange(e, index)}
-                  />
+                  <Typography variant="h6">Song {index + 1}:</Typography>
+                  <Grid container spacing={5} size={12}>
+                    <Grid item size={3}>
+                      <TextField
+                        required
+                        id={`title-${index}`}
+                        name="title"
+                        label="Track Name"
+                        variant="standard"
+                        margin="normal"
+                        fullWidth
+                        helperText="Please enter Track Name"
+                        value={song.title}
+                        onChange={(e) => handleSongChange(e, index)}
+                      />
+                    </Grid>
+                    <Grid item size={3}>
+                      <TextField
+                        required
+                        id={`singerName-${index}`}
+                        name="singerName"
+                        label="Singer Name"
+                        variant="standard"
+                        margin="normal"
+                        fullWidth
+                        helperText="Please enter Singer Name"
+                        value={song.singerName}
+                        onChange={(e) => handleSongChange(e, index)}
+                      />
+                    </Grid>
+                    <Grid item size={3}>
+                      <TextField
+                        required
+                        id={`duration-${index}`}
+                        name="duration"
+                        label="Duration in (MM:SS)"
+                        variant="standard"
+                        margin="normal"
+                        fullWidth
+                        helperText="Please enter Track Duration"
+                        value={song.duration}
+                        onChange={(e) => handleSongChange(e, index)}
+                      />
+                    </Grid>
+                    <Grid item size={3}>
+                      <Typography variant="body1">Song File:</Typography>
+                      <input
+                        accept="audio/*"
+                        id={`mp3File-${index}`}
+                        type="file"
+                        onChange={(e) => handleSongFileChange(e, index)}
+                      />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Fragment>
             ))}
-            <Grid item xs={12} sx={{ marginBottom: 2 }}>
-              <Button variant="contained" onClick={addMoreSong}>
-                Add More
-              </Button>
-            </Grid>
-            <Grid item xs={12} sx={{ marginBottom: 2 }}>
+
+            <Grid item xs={12} sx={{ marginTop: 5, marginBottom: 2 }}>
               <Button type="submit" variant="contained">
                 Create Album
               </Button>
