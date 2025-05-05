@@ -68,6 +68,7 @@ const Header = () => {
           ) : (
             <Fragment>
               <Typography gutterBottom variant="button">
+                <Link to="/addAlbum">Add album</Link> |
                 <Link to="/login">Login</Link>
               </Typography>
             </Fragment>

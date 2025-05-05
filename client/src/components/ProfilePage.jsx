@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  Link,
-  useLocation,
-} from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 import {
   Box,
@@ -75,14 +68,14 @@ const ProfilePage = () => {
                         </ListItemButton>
                       </Link>
 
-                      <Link to="addAlbum" state={{ from: location.pathname }}>
+                      {/* <Link to="addAlbum" state={{ from: location.pathname }}>
                         <ListItemButton
                           selected={selectedIndex === 3}
                           onClick={(event) => handleListItemClick(event, 3)}
                         >
                           <ListItemText primary="Add Album" />
                         </ListItemButton>
-                      </Link>
+                      </Link> */}
 
                       <Link
                         to="AlbumsTable"

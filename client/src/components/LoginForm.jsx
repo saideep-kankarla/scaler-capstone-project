@@ -76,11 +76,11 @@ const LoginForm = () => {
           margin="normal"
           required
           fullWidth
+          helperText="Please enter a registered password"
           name="password"
           label="Password"
           type="password"
           id="password"
-          helperText="Please enter a registered password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
