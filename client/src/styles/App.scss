@@ -83,5 +83,23 @@ body {
         }
       }
     }
+
+    .tableContainer {
+      thead {
+        background-color: #000;
+        opacity: 0.65;
+        tr {
+          th {
+            color: #fff;
+
+            span {
+              svg {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

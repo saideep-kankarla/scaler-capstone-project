@@ -9,8 +9,9 @@ import RegisterForm from './RegisterForm.jsx';
 import AlbumPage from './AlbumPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import ProfileInfo from './ProfileInfo.jsx';
-import UsersCrud from './UsersCrud.jsx';
-import AlbumsCrud from './AlbumsCrud.jsx';
+import UsersTable from './UsersTable.jsx';
+import AlbumForm from './AlbumForm.jsx';
+import AlbumsTable from './AlbumsTable.jsx';
 
 import PremiumPage from './PremiumPage.jsx';
 
@@ -45,8 +46,9 @@ const Layout = () => {
                     <Route path="/album/:id" element={<AlbumPage />} />
                     <Route path="/profile" element={<ProfilePage />}>
                       <Route path="info" element={<ProfileInfo />} />
-                      <Route path="usersCrud" element={<UsersCrud />} />
-                      <Route path="albumsCrud" element={<AlbumsCrud />} />
+                      <Route path="usersTable" element={<UsersTable />} />
+                      <Route path="addAlbum" element={<AlbumForm />} />
+                      <Route path="AlbumsTable" element={<AlbumsTable />} />
                     </Route>
 
                     <Route path="/premium" element={<PremiumPage />} />

@@ -17,6 +17,6 @@ router.get('/allUsers', verifyToken, getAllUsers);
 //Post routes
 router.post('/login', login);
 router.post('/register', register);
-router.post('/deleteUser', verifyToken, deleteUser);
+router.delete('/deleteUser/:userId', verifyToken, deleteUser);
 
 module.exports = router;
