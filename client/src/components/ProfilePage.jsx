@@ -15,15 +15,14 @@ import {
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 const ProfilePage = () => {
+  // check for logged in user for protected routes
   const navigate = useNavigate();
-
   const auth = useAuth();
-
-  const location = useLocation();
-
   if (auth?.user === null) {
     navigate('/login');
   }
+
+  const location = useLocation();
 
   const [selectedIndex, setSelectedIndex] = useState(1);
 
@@ -42,7 +41,7 @@ const ProfilePage = () => {
               className="profileContainer"
             >
               <Typography color="textPrimary" gutterBottom variant="h5">
-                Account Details Of {auth?.user?.name}
+                {auth?.user?.role.toUpperCase()} work area
               </Typography>
               <Divider />
               <Box sx={{ flexGrow: 1 }}>
@@ -68,17 +67,17 @@ const ProfilePage = () => {
                         </ListItemButton>
                       </Link>
 
-                      {/* <Link to="addAlbum" state={{ from: location.pathname }}>
+                      <Link to="addAlbum" state={{ from: location.pathname }}>
                         <ListItemButton
                           selected={selectedIndex === 3}
                           onClick={(event) => handleListItemClick(event, 3)}
                         >
                           <ListItemText primary="Add Album" />
                         </ListItemButton>
-                      </Link> */}
+                      </Link>
 
                       <Link
-                        to="AlbumsTable"
+                        to="albumsTable"
                         state={{ from: location.pathname }}
                       >
                         <ListItemButton

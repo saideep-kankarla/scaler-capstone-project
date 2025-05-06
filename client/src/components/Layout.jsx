@@ -44,12 +44,12 @@ const Layout = () => {
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/album/:id" element={<AlbumPage />} />
-                    <Route path="/addAlbum" element={<AlbumForm />} />
 
                     <Route path="/profile" element={<ProfilePage />}>
                       <Route path="info" element={<ProfileInfo />} />
                       <Route path="usersTable" element={<UsersTable />} />
-                      <Route path="AlbumsTable" element={<AlbumsTable />} />
+                      <Route path="addAlbum" element={<AlbumForm />} />
+                      <Route path="albumsTable" element={<AlbumsTable />} />
                     </Route>
 
                     <Route path="/premium" element={<PremiumPage />} />

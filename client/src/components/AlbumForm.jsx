@@ -10,8 +10,17 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthProvider';
 
 const AlbumForm = () => {
+  // check for logged in user for protected routes
+  const navigate = useNavigate();
+  const auth = useAuth();
+  if (auth?.user === null) {
+    navigate('/login');
+  }
+
   const [name, setName] = useState('');
   const [language, setLanguage] = useState('');
   const [composer, setComposer] = useState('');

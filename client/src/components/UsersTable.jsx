@@ -12,9 +12,19 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthProvider';
+
 import axios from '../utils/axios-config';
 
 export default function UsersTable() {
+  // check for logged in user for protected routes
+  const navigate = useNavigate();
+  const auth = useAuth();
+  if (auth?.user === null) {
+    navigate('/login');
+  }
+
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState([]);
   const [snackbar, setSnackbar] = useState({
