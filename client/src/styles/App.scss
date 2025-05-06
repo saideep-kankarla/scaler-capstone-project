@@ -19,6 +19,19 @@ body {
       }
     }
 
+    .albumsContainer {
+      .albumCardCss {
+        height: auto;
+        min-height: 360px;
+        max-height: 360px;
+        h6 {
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
     .albumContainer {
       .album-info-container {
         width: 300px;

@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <div>
+      <div className="albumsContainer">
         <Typography gutterBottom variant="h4">
           <b>Premium Albums</b>
         </Typography>
@@ -59,8 +59,11 @@ const Home = () => {
 
                       <CardContent>
                         <Typography gutterBottom variant="subtitle1">
-                          <b>{row.name}</b> <br /> Composer &bull;{' '}
-                          {row.composer}
+                          <b>{row.name}</b>
+                          <p>
+                            Composer &bull;&nbsp;
+                            {row.composer}
+                          </p>
                         </Typography>
                       </CardContent>
                     </CardActionArea>

@@ -34,7 +34,7 @@ const Home = () => {
         <Typography gutterBottom variant="h4">
           <b>Top Albums</b>
         </Typography>
-        <div>
+        <div className="albumsContainer">
           <Stack
             direction="row"
             spacing={5}
@@ -58,7 +58,11 @@ const Home = () => {
                         gutterBottom
                         variant="subtitle1"
                       >
-                        <b>{row.name}</b> <br /> Composer &bull; {row.composer}
+                        <b>{row.name}</b>
+                        <p>
+                          Composer &bull;&nbsp;
+                          {row.composer}
+                        </p>
                       </Typography>
                     </CardContent>
                   </CardActionArea>

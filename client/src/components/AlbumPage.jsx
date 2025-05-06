@@ -18,6 +18,7 @@ const AlbumPage = () => {
 
   const [data, setData] = useState([]);
   const [sData, setsData] = useState([]);
+  const [currentActiveSong, setCurrentActiveSong] = useState(1);
   const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
 
   // Fetch data from API
@@ -44,7 +45,11 @@ const AlbumPage = () => {
     fetchData();
   }, []);
 
-  const [currentSong, setCurrentSong] = useState(null);
+  const [currentSong, setCurrentSong] = useState({
+    id: 1,
+    songName: null,
+    mp3FilePath: null,
+  });
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
@@ -62,6 +67,8 @@ const AlbumPage = () => {
         }
       }
     } else {
+      setCurrentActiveSong(id);
+
       // Play new song
       setCurrentSong({
         id,
@@ -108,7 +115,7 @@ const AlbumPage = () => {
             </Typography>
 
             <Typography align="center" gutterBottom variant="subtitle1">
-              {sData.length} Songs &bull; {calculateTotalMinutes().toFixed(2)}{' '}
+              {sData.length} Songs &bull; {calculateTotalMinutes().toFixed(2)}
               Minutes &bull; {data.releaseYear}
             </Typography>
             <Typography align="center" gutterBottom variant="subtitle2">
@@ -126,6 +133,10 @@ const AlbumPage = () => {
                     borderBottom: '1px solid #2f2f2f',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    backgroundColor:
+                      currentActiveSong === song._id
+                        ? 'rgba(58, 56, 56, 0.5)'
+                        : 'transparent', // Add active class logic here
                   }}
                 >
                   <Grid item xs={1} sx={{ textAlign: 'left' }}>
