@@ -22,13 +22,15 @@ const Home = () => {
         const response = await axios.get(
           `${apiBaseUrl}/api/albums/premiumAlbums`,
         );
-        setData(response.data.albums);
+        setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
+
+  console.log('data', data);
 
   return (
     <Fragment>
