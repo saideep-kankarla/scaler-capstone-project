@@ -1,5 +1,4 @@
 import { Fragment, useState } from 'react';
-import axios from 'axios';
 import {
   Box,
   Grid,
@@ -12,6 +11,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
+import axios from '../utils/axios-config';
 
 const AlbumForm = () => {
   // check for logged in user for protected routes

@@ -52,7 +52,7 @@ const albumSchema = new mongoose.Schema(
     songs: [songSchema],
     premium: {
       type: Boolean,
-      default: 'false',
+      default: false,
     },
   },
   {

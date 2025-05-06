@@ -78,15 +78,6 @@ exports.createAlbum = async (req, res) => {
   }
 };
 
-exports.getAllAlbums = async (req, res) => {
-  try {
-    const albums = await Album.find();
-    res.status(200).json({ status: 200, message: 'Success', albums });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 exports.getAlbumById = async (req, res) => {
   try {
     const album = await Album.findById(req.params.id);
@@ -154,12 +145,19 @@ exports.deleteAlbum = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.getAllAlbums = async (req, res) => {
+  try {
+    const albums = await Album.find({ premium: false });
+    res.status(200).json({ status: 200, message: 'Success', albums });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-//Get Premium Albums
-exports.getPremiumAlbums = async (req, res) => {
+exports.getAllPremiumAlbums = async (req, res) => {
   try {
     const albums = await Album.find({ premium: true });
-    res.json(albums);
+    res.status(200).json({ status: 200, message: 'Success', albums });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

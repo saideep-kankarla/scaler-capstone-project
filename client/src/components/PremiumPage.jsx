@@ -22,7 +22,7 @@ const Home = () => {
         const response = await axios.get(
           `${apiBaseUrl}/api/albums/premiumAlbums`,
         );
-        setData(response.data);
+        setData(response.data.albums);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
