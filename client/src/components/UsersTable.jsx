@@ -12,9 +12,19 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthProvider';
+
 import axios from '../utils/axios-config';
 
 export default function UsersTable() {
+  // check for logged in user for protected routes
+  const navigate = useNavigate();
+  const auth = useAuth();
+  if (auth?.user === null) {
+    navigate('/login');
+  }
+
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState([]);
   const [snackbar, setSnackbar] = useState({
@@ -102,7 +112,7 @@ export default function UsersTable() {
               <TableCell>Name</TableCell>
               <TableCell>Phone</TableCell>
               <TableCell>E-mail</TableCell>
-              <TableCell>is Premium Member</TableCell>
+              <TableCell>Is Premium Member</TableCell>
               <TableCell>Member Since</TableCell>
             </TableRow>
           </TableHead>
@@ -118,7 +128,7 @@ export default function UsersTable() {
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.phone}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell>{String(row.premiumSubscribed)}</TableCell>
+                <TableCell>{row.premiumSubscribed ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{row.createdAt}</TableCell>
               </TableRow>
             ))}

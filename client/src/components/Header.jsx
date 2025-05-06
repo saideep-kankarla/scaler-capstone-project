@@ -43,6 +43,9 @@ const Header = () => {
       >
         <Link to="/">
           <img src={Logo} style={{ height: '34px' }} alt="Audiio Logo" />
+          <Typography gutterBottom variant="caption">
+            By Saideep Kankarla
+          </Typography>
         </Link>
 
         <Stack direction="row" spacing={2}>
@@ -68,7 +71,6 @@ const Header = () => {
           ) : (
             <Fragment>
               <Typography gutterBottom variant="button">
-                <Link to="/addAlbum">Add album</Link> |
                 <Link to="/login">Login</Link>
               </Typography>
             </Fragment>
@@ -96,6 +98,12 @@ const Header = () => {
                 ml: -0.5,
                 mr: 1,
               },
+              a: {
+                color: 'rgba(0, 0, 0, 0.87)',
+                textDecoration: 'none',
+                fontSize: '16px',
+                fontWeight: 400,
+              },
               '&::before': {
                 content: '""',
                 display: 'block',
@@ -115,28 +123,27 @@ const Header = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Link to="/profile">
-          <MenuItem>
+          <MenuItem onClick={handleClose}>
             <ListItemIcon>
               <PersonOutline fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="My Account" />
           </MenuItem>
         </Link>
-        {auth && !auth?.user?.premiumSubscribed ? (
-          <div style={{ padding: '6px 0' }}>
-            <Divider />
-            <Link to="/premium">
-              <MenuItem sx={{ width: '100%', textAlign: 'left' }}>
-                <ListItemIcon>
-                  <CardMembership fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary="Premium Albums" />
-              </MenuItem>
-            </Link>
-          </div>
-        ) : (
-          ''
-        )}
+        <div style={{ padding: '6px 0' }}>
+          <Divider />
+          <Link to="/premium">
+            <MenuItem
+              onClick={handleClose}
+              sx={{ width: '100%', textAlign: 'left' }}
+            >
+              <ListItemIcon>
+                <CardMembership fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Premium Albums" />
+            </MenuItem>
+          </Link>
+        </div>
         <Divider />
         <MenuItem onClick={auth?.logout}>
           <ListItemIcon>

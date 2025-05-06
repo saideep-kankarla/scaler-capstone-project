@@ -4,6 +4,9 @@
 body {
   background-color: #030303 !important;
   color: #fff !important;
+  a {
+    text-decoration: none !important;
+  }
   .mainvContainer {
     padding: 0;
     .header-container {
@@ -15,6 +18,20 @@ body {
         }
       }
     }
+
+    .albumsContainer {
+      .albumCardCss {
+        height: auto;
+        min-height: 360px;
+        max-height: 360px;
+        h6 {
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
     .albumContainer {
       .album-info-container {
         width: 300px;
@@ -34,6 +51,9 @@ body {
       &.withPlayer {
         background-color: rgb(44, 40, 40);
         margin: 10px 0;
+      }
+      button {
+        text-decoration: none;
       }
     }
 
