@@ -58,11 +58,7 @@ const Home = () => {
                       />
 
                       <CardContent>
-                        <Typography
-                          gutterBottom
-                          variant="subtitle1"
-                          component="div"
-                        >
+                        <Typography gutterBottom variant="subtitle1">
                           <b>{row.name}</b> <br /> Composer &bull;{' '}
                           {row.composer}
                         </Typography>
