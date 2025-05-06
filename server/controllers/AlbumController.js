@@ -81,7 +81,7 @@ exports.createAlbum = async (req, res) => {
 exports.getAllAlbums = async (req, res) => {
   try {
     const albums = await Album.find();
-    res.status(200).json(albums);
+    res.status(200).json({ status: 200, message: 'Success', albums });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -148,8 +148,8 @@ exports.updateAlbum = async (req, res) => {
 
 exports.deleteAlbum = async (req, res) => {
   try {
-    await Album.findByIdAndRemove(req.params.id);
-    res.status(200).json({ message: 'Album deleted successfully' });
+    await Album.findByIdAndDelete(req.params.id);
+    res.status(204).json({ message: 'Album deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

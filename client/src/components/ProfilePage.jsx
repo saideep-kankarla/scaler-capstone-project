@@ -46,7 +46,7 @@ const ProfilePage = () => {
               <Divider />
               <Box sx={{ flexGrow: 1 }}>
                 <Grid className="profileGrids" container spacing={4}>
-                  <Grid className="profileLeftSection" size={3}>
+                  <Grid className="profileLeftSection" size={2}>
                     <List component="nav">
                       <Link to="info" state={{ from: location.pathname }}>
                         <ListItemButton
@@ -89,7 +89,7 @@ const ProfilePage = () => {
                       </Link>
                     </List>
                   </Grid>
-                  <Grid className="profileMainSection" size={9}>
+                  <Grid className="profileMainSection" size={10}>
                     <Outlet />
                   </Grid>
                 </Grid>

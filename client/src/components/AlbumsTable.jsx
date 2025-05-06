@@ -29,8 +29,8 @@ export default function AlbumsTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiBaseUrl}/api/users/allUsers`);
-        setData(response.data.users);
+        const response = await axios.get(`${apiBaseUrl}/api/albums/getAll`);
+        setData(response.data.albums);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -52,9 +52,7 @@ export default function AlbumsTable() {
     try {
       // Simulate API call for deletion
       await Promise.all(
-        selected.map((id) =>
-          axios.delete(`${apiBaseUrl}/api/users/deleteUser/${id}`),
-        ),
+        selected.map((id) => axios.delete(`${apiBaseUrl}/api/albums/${id}`)),
       );
       setData((prevData) =>
         prevData.filter((item) => !selected.includes(item._id)),
@@ -100,10 +98,12 @@ export default function AlbumsTable() {
                 />
               </TableCell>
               <TableCell>Name</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>E-mail</TableCell>
-              <TableCell>is Premium Member</TableCell>
-              <TableCell>Member Since</TableCell>
+              <TableCell>Language</TableCell>
+              <TableCell>Composer</TableCell>
+              <TableCell width={250}>Description</TableCell>
+              <TableCell>Year</TableCell>
+              <TableCell>Is Premium</TableCell>
+              <TableCell>Poster</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -116,10 +116,18 @@ export default function AlbumsTable() {
                   />
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>{row.phone}</TableCell>
-                <TableCell>{row.email}</TableCell>
-                <TableCell>{String(row.premiumSubscribed)}</TableCell>
-                <TableCell>{row.createdAt}</TableCell>
+                <TableCell>{row.language}</TableCell>
+                <TableCell>{row.composer}</TableCell>
+                <TableCell>{row.description}</TableCell>
+                <TableCell>{row.releaseYear}</TableCell>
+                <TableCell>{row.premium ? 'Yes' : 'No'}</TableCell>
+                <TableCell>
+                  <img
+                    src={apiBaseUrl + '/posters/' + row.poster}
+                    alt={row.name}
+                    height={100}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

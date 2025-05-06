@@ -19,10 +19,16 @@ app.use(
   })
 );
 
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 app.use(express.json());
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/posters', express.static(path.join(__dirname, 'uploads/posters')));
+app.use('/mp3', express.static(path.join(__dirname, 'uploads/songs')));
+
 app.use(express.urlencoded({ extended: true })); // for URL-encoded bodies
 
 //error handling middleware

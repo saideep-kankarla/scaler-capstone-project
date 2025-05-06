@@ -112,7 +112,7 @@ export default function UsersTable() {
               <TableCell>Name</TableCell>
               <TableCell>Phone</TableCell>
               <TableCell>E-mail</TableCell>
-              <TableCell>is Premium Member</TableCell>
+              <TableCell>Is Premium Member</TableCell>
               <TableCell>Member Since</TableCell>
             </TableRow>
           </TableHead>
@@ -128,7 +128,7 @@ export default function UsersTable() {
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.phone}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell>{String(row.premiumSubscribed)}</TableCell>
+                <TableCell>{row.premiumSubscribed ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{row.createdAt}</TableCell>
               </TableRow>
             ))}
