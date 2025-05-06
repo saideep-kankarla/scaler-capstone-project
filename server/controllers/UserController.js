@@ -105,8 +105,6 @@ const getAllUsers = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    console.log('testst', req.params.userId);
-
     const userId = req.params.userId;
     console.log('Inside delete user', userId);
 

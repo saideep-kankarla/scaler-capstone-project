@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
 import {
@@ -48,7 +48,7 @@ const ProfilePage = () => {
                 <Grid className="profileGrids" container spacing={4}>
                   <Grid className="profileLeftSection" size={2}>
                     <List component="nav">
-                      <Link to="info" state={{ from: location.pathname }}>
+                      <Link to="/profile" state={{ from: location.pathname }}>
                         <ListItemButton
                           selected={selectedIndex === 1}
                           onClick={(event) => handleListItemClick(event, 1)}
@@ -56,37 +56,48 @@ const ProfilePage = () => {
                           <ListItemText primary="Profile Info" />
                         </ListItemButton>
                       </Link>
+                      {auth?.user?.role === 'admin' ? (
+                        <Fragment>
+                          <Divider />
+                          <Link
+                            to="usersTable"
+                            state={{ from: location.pathname }}
+                          >
+                            <ListItemButton
+                              selected={selectedIndex === 2}
+                              onClick={(event) => handleListItemClick(event, 2)}
+                            >
+                              <ListItemText primary="Users" />
+                            </ListItemButton>
+                          </Link>
 
-                      <Divider />
-                      <Link to="usersTable" state={{ from: location.pathname }}>
-                        <ListItemButton
-                          selected={selectedIndex === 2}
-                          onClick={(event) => handleListItemClick(event, 2)}
-                        >
-                          <ListItemText primary="Users" />
-                        </ListItemButton>
-                      </Link>
+                          <Link
+                            to="addAlbum"
+                            state={{ from: location.pathname }}
+                          >
+                            <ListItemButton
+                              selected={selectedIndex === 3}
+                              onClick={(event) => handleListItemClick(event, 3)}
+                            >
+                              <ListItemText primary="Add Album" />
+                            </ListItemButton>
+                          </Link>
 
-                      <Link to="addAlbum" state={{ from: location.pathname }}>
-                        <ListItemButton
-                          selected={selectedIndex === 3}
-                          onClick={(event) => handleListItemClick(event, 3)}
-                        >
-                          <ListItemText primary="Add Album" />
-                        </ListItemButton>
-                      </Link>
-
-                      <Link
-                        to="albumsTable"
-                        state={{ from: location.pathname }}
-                      >
-                        <ListItemButton
-                          selected={selectedIndex === 4}
-                          onClick={(event) => handleListItemClick(event, 4)}
-                        >
-                          <ListItemText primary="List Album(s)" />
-                        </ListItemButton>
-                      </Link>
+                          <Link
+                            to="albumsTable"
+                            state={{ from: location.pathname }}
+                          >
+                            <ListItemButton
+                              selected={selectedIndex === 4}
+                              onClick={(event) => handleListItemClick(event, 4)}
+                            >
+                              <ListItemText primary="List Album(s)" />
+                            </ListItemButton>
+                          </Link>
+                        </Fragment>
+                      ) : (
+                        ''
+                      )}
                     </List>
                   </Grid>
                   <Grid className="profileMainSection" size={10}>

@@ -145,7 +145,17 @@ exports.deleteAlbum = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-exports.getAllAlbums = async (req, res) => {
+
+exports.getAll = async (req, res) => {
+  try {
+    const albums = await Album.find({});
+    res.status(200).json({ status: 200, message: 'Success', albums });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getAllFreeAlbums = async (req, res) => {
   try {
     const albums = await Album.find({ premium: false });
     res.status(200).json({ status: 200, message: 'Success', albums });

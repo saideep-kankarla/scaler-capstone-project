@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiBaseUrl}/api/albums/getAll`);
+        const response = await axios.get(`${apiBaseUrl}/api/albums/getAllFree`);
         setData(response.data.albums);
       } catch (error) {
         console.error('Error fetching data:', error);

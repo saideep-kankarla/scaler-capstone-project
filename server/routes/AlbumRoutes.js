@@ -7,7 +7,8 @@ const verifyToken = require('../middlewares/verifyJwt');
 router.get('/testAlbum', (req, res) => {
   res.send('Welcome to Album API call!');
 });
-router.get('/getAll', albumController.getAllAlbums);
+router.get('/getAll', albumController.getAll);
+router.get('/getAllFree', albumController.getAllFreeAlbums);
 router.get('/premiumAlbums', verifyToken, albumController.getAllPremiumAlbums);
 router.get('/:id', albumController.getAlbumById);
 

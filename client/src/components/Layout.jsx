@@ -46,7 +46,7 @@ const Layout = () => {
                     <Route path="/album/:id" element={<AlbumPage />} />
 
                     <Route path="/profile" element={<ProfilePage />}>
-                      <Route path="info" element={<ProfileInfo />} />
+                      <Route index element={<ProfileInfo />} />
                       <Route path="usersTable" element={<UsersTable />} />
                       <Route path="addAlbum" element={<AlbumForm />} />
                       <Route path="albumsTable" element={<AlbumsTable />} />
