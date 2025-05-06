@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import {
   Card,
   CardActionArea,
@@ -8,16 +8,26 @@ import {
   Stack,
 } from '@mui/material';
 
-import devara from '../assets/thumbs/devara1.jpg';
-import animal from '../assets/thumbs/animal1.jpg';
-import hanuman from '../assets/thumbs/hanuman.jpg';
-import og from '../assets/thumbs/og.jpg';
-import kgf from '../assets/thumbs/kgf1.jpg';
-import salaar from '../assets/thumbs/salaar.jpg';
-import kick from '../assets/thumbs/kick.jpg';
 import { Link } from 'react-router-dom';
+import axios from '../utils/axios-config';
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiBaseUrl}/api/albums/getAll`);
+        setData(response.data.albums);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Fragment>
       <div>
@@ -31,77 +41,30 @@ const Home = () => {
             useFlexGap
             sx={{ flexWrap: 'wrap' }}
           >
-            <Link to="/album/1">
-              <Card className="albumCardCss">
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    sx={{ height: 264 }}
-                    image={devara}
-                    alt="Devara"
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="subtitle1"
-                      component="div"
-                    >
-                      <b>Devara</b> <br /> Composer &bull; Anirudh
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Link>
-            <Link to="/album/2">
-              <Card className="albumCardCss">
-                <CardMedia sx={{ height: 264 }} image={animal} title="Animal" />
-                <CardContent>
-                  <Typography gutterBottom variant="subtitle1">
-                    <b>Animal</b> <br /> Composer - Harshavardhan
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={hanuman} title="Hanuman" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  <b>Hanuman</b> <br /> Composer - Harshavardhan
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={salaar} title="Salaar" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  <b>Salaar</b> <br /> Composer - Ravi Basur
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={og} title="OG" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  <b>OG</b> <br /> Composer - Thaman
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={kick} title="Kick" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  <b>Kick</b> <br /> Composer - Thaman
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card className="albumCardCss">
-              <CardMedia sx={{ height: 264 }} image={kgf} title="KGF" />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  <b>KGF</b> <br /> Composer - Ravi Basur
-                </Typography>
-              </CardContent>
-            </Card>
+            {data.map((row) => (
+              <Link key={row._id} to={'/album/' + row._id}>
+                <Card className="albumCardCss">
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      sx={{ height: 264 }}
+                      image={apiBaseUrl + '/posters/' + row.poster}
+                      alt={row.name}
+                    />
+
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="subtitle1"
+                        component="div"
+                      >
+                        <b>{row.name}</b> <br /> Composer &bull; {row.composer}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
+            ))}
           </Stack>
         </div>
       </div>

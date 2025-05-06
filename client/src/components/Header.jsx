@@ -43,6 +43,9 @@ const Header = () => {
       >
         <Link to="/">
           <img src={Logo} style={{ height: '34px' }} alt="Audiio Logo" />
+          <Typography gutterBottom variant="caption">
+            By Saideep Kankarla
+          </Typography>
         </Link>
 
         <Stack direction="row" spacing={2}>

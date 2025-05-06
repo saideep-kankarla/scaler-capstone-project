@@ -93,7 +93,7 @@ exports.getAlbumById = async (req, res) => {
     if (!album) {
       return res.status(404).json({ message: 'Album not found' });
     }
-    res.status(200).json(album);
+    res.status(200).json({ status: 200, message: 'Success', album });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

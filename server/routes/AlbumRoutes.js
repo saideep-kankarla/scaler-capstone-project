@@ -8,6 +8,8 @@ router.get('/testAlbum', (req, res) => {
 });
 router.post('/create', albumController.createAlbum);
 router.get('/getAll', albumController.getAllAlbums);
+router.get('/premiumAlbums', albumController.getPremiumAlbums);
+
 router.get('/:id', albumController.getAlbumById);
 router.put('/:id', albumController.updateAlbum);
 router.delete('/:id', albumController.deleteAlbum);

@@ -1,4 +1,6 @@
-import { Fragment, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import {
   Box,
   Grid,
@@ -9,18 +11,46 @@ import {
 } from '@mui/material';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { AudioPlayer } from 'react-audio-play';
-
-import devara from '../assets/thumbs/devara1.jpg';
-
-import song1 from '../assets/mp3/hakee-333940.mp3';
-import song2 from '../assets/mp3/town-10169.mp3';
+import axios from '../utils/axios-config';
 
 const AlbumPage = () => {
+  let params = useParams();
+
+  const [data, setData] = useState([]);
+  const [sData, setsData] = useState([]);
+  const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/api/albums/${params.id}`,
+        );
+        setData(response.data.album);
+
+        const songData = (await response.data.album.songs) || [];
+
+        const updatedSongs = await songData.map((song) => ({
+          ...song,
+          mp3Path: `${apiBaseUrl}/mp3/${song.mp3Path}`,
+        }));
+
+        setsData(updatedSongs);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
   const handlePlayPause = (id, songName, mp3FilePath) => {
+    console.log('xaxax', mp3FilePath, sData);
+
     if (currentSong && currentSong.id === id) {
       // Toggle play/pause
       setIsPlaying(!isPlaying);
@@ -42,36 +72,15 @@ const AlbumPage = () => {
     }
   };
 
-  const songData = [
-    {
-      id: 1,
-      songName: 'Fear Song',
-      singers: 'Anirudh Ravichandran',
-      duration: '3:45',
-      mp3FilePath: song1,
-    },
-    {
-      id: 2,
-      songName: 'Chuttamalle',
-      singers: 'Shilpa Rao',
-      duration: '4:10',
-      mp3FilePath: song2,
-    },
-    {
-      id: 3,
-      songName: 'Daavudi',
-      singers: 'Nakash Aziz,Akasa',
-      duration: '2:50',
-      mp3FilePath: song1,
-    },
-    {
-      id: 4,
-      songName: 'Ayudha pooja',
-      singers: 'Kaala Bhairava',
-      duration: '2:50',
-      mp3FilePath: song1,
-    },
-  ];
+  const calculateTotalMinutes = () => {
+    let totalSeconds = 0;
+    sData.forEach((item) => {
+      const [minutes, seconds] = item.duration.split(':').map(Number);
+      totalSeconds += minutes * 60 + seconds;
+    });
+    const totalMinutes = totalSeconds / 60;
+    return totalMinutes;
+  };
 
   return (
     <div>
@@ -79,37 +88,39 @@ const AlbumPage = () => {
         <Grid className="albumContainer" size={12} container>
           <Grid className="album-info-container" size={5}>
             <Typography align="center" gutterBottom variant="subtitle1">
-              <b>Anirudh Ravichandran</b>
+              <b>{data.composer}</b>
             </Typography>
             <Card className="albumCardCss withPlayer">
               <CardActionArea>
                 <CardMedia
                   component="img"
                   sx={{ height: 264 }}
-                  image={devara}
-                  alt="Devara"
+                  image={apiBaseUrl + '/posters/' + data.poster}
+                  alt={data.name}
                 />
               </CardActionArea>
             </Card>
             <Typography align="center" gutterBottom variant="h5">
-              <b>Devara - Telugu (Original Motion Picture Soundtrack)</b>
+              <b>
+                {data.name} - {data.language} (Original Motion Picture
+                Soundtrack)
+              </b>
             </Typography>
 
             <Typography align="center" gutterBottom variant="subtitle1">
-              4 Songs &bull; 15:00 &bull; 2024
+              {sData.length} Songs &bull; {calculateTotalMinutes().toFixed(2)}{' '}
+              Minutes &bull; {data.releaseYear}
             </Typography>
             <Typography align="center" gutterBottom variant="subtitle2">
-              A village chief's son secretly continues his father's mission to
-              end smuggling, while pretending to be weak and maintaining the
-              illusion that his father is still alive.
+              {data.description}
             </Typography>
           </Grid>
           <Grid className="album-songs-container" size={7}>
             <Box>
-              {songData.map((song, index) => (
+              {sData.map((song, index) => (
                 <Grid
                   container
-                  key={song.id}
+                  key={song._id}
                   sx={{
                     padding: 2,
                     borderBottom: '1px solid #2f2f2f',
@@ -130,8 +141,8 @@ const AlbumPage = () => {
                       maxWidth: '100%',
                     }}
                   >
-                    <Typography gutterBottom>{song.songName}</Typography>
-                    <Typography variant="caption">{song.singers}</Typography>
+                    <Typography gutterBottom>{song.title}</Typography>
+                    <Typography variant="caption">{song.singerName}</Typography>
                   </Grid>
                   <Grid
                     item
@@ -158,13 +169,9 @@ const AlbumPage = () => {
                   >
                     <PlayCircleFilledWhiteIcon
                       sx={{ fontSize: 40 }}
-                      key={song.id}
+                      key={song._id}
                       onClick={() =>
-                        handlePlayPause(
-                          song.id,
-                          song.songName,
-                          song.mp3FilePath,
-                        )
+                        handlePlayPause(song._id, song.songName, song.mp3Path)
                       }
                     />
                   </Grid>
