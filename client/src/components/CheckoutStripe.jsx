@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { loadStripe } from '@stripe/stripe-js';
 import {
   Elements,
@@ -15,6 +17,8 @@ const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
 function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   const handlePayment = async (event) => {
     event.preventDefault();
@@ -30,6 +34,34 @@ function PaymentForm() {
       console.error(error);
     } else if (paymentIntent.status === 'succeeded') {
       console.log('Payment successful!', paymentIntent);
+      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+
+      const response = await axios.post(`${apiBaseUrl}/api/payments/create`, {
+        stripePaymentId: paymentIntent.id,
+        userId: auth?.user?._id,
+        amount: paymentIntent.amount / 100,
+        status: paymentIntent.status,
+      });
+
+      const { status } = response.data;
+      if (status === 201) {
+        console.log('Payment record added.');
+      }
+
+      const responseUserPremium = await axios.patch(
+        `${apiBaseUrl}/api/payments/premium-subscribe`,
+        {},
+      );
+      const patchStatus = responseUserPremium.data.status;
+      if (patchStatus === 200) {
+        console.log('User premium subscription field updated.');
+      }
+
+      if (status === 201 && patchStatus === 200) {
+        navigate('/paymentSuccess');
+      } else {
+        navigate('/paymentFail');
+      }
     }
   };
 

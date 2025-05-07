@@ -117,4 +117,30 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getAllUsers, deleteUser };
+const updatePremiumSubscription = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { premiumSubscribed: true },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(304).json({ message: 'User not found' });
+    }
+    res
+      .status(201)
+      .json({ status: 200, message: 'User Subscription Updated Successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error on patch' });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  getAllUsers,
+  deleteUser,
+  updatePremiumSubscription,
+};

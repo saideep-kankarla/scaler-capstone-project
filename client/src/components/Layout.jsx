@@ -15,7 +15,9 @@ import AlbumsTable from './AlbumsTable.jsx';
 import PremiumPage from './PremiumPage.jsx';
 
 import Checkout from './CheckoutStripe.jsx';
-import PaymentStatus from './PaymentStatus.jsx';
+
+import PaymentSuccess from './PaymentSuccess.jsx';
+import PaymentFailure from './PaymentFailure.jsx';
 
 const Layout = () => {
   return (
@@ -54,9 +56,13 @@ const Layout = () => {
                       <Route path="addAlbum" element={<AlbumForm />} />
                       <Route path="albumsTable" element={<AlbumsTable />} />
                     </Route>
-
-                    <Route path="/paymentStatus" element={<PaymentStatus />} />
                     <Route path="/premium" element={<PremiumPage />} />
+
+                    <Route
+                      path="/paymentSuccess"
+                      element={<PaymentSuccess />}
+                    />
+                    <Route path="/paymentFail" element={<PaymentFailure />} />
                   </Routes>
                 </main>
               </Grid>

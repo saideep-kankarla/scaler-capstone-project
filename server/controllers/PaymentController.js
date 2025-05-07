@@ -56,7 +56,7 @@ const retrievePayment = async (req, res) => {
   }
 };
 
-exports.getAllPayments = async (req, res) => {
+const getAllPayments = async (req, res) => {
   try {
     const payments = await Payment.find().exec();
     res.status(200).json({ status: 200, message: 'Success', payments });
@@ -64,8 +64,7 @@ exports.getAllPayments = async (req, res) => {
     res.status(500).json({ message: 'Error fetching payments' });
   }
 };
-
-exports.getPaymentById = async (req, res) => {
+const getPaymentById = async (req, res) => {
   try {
     const paymentId = req.params.id;
     const payment = await Payment.findById(paymentId).exec();
@@ -79,9 +78,22 @@ exports.getPaymentById = async (req, res) => {
   }
 };
 
-exports.createPayment = async (req, res) => {
+const createPayment = async (req, res) => {
   try {
-    const payment = new Payment(req.body);
+    const { stripePaymentId, userId, amount, status } = req.body;
+
+    // Basic validation
+    if (!stripePaymentId || !userId || !amount || !status) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const payment = new Payment({
+      stripePaymentId,
+      userId,
+      amount,
+      status,
+    });
+
     await payment.save();
     res
       .status(201)

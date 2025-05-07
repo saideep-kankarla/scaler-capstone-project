@@ -7,7 +7,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    customerId: {
+    userId: {
       type: String,
       required: true,
     },
@@ -15,7 +15,7 @@ const paymentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    paymentStatus: {
+    status: {
       type: String,
       enum: ['succeeded', 'pending', 'failed'],
       required: true,
@@ -26,6 +26,6 @@ const paymentSchema = new mongoose.Schema(
   }
 );
 
-const Payment = mongoose.model('Payment', paymentSchema);
+const Payment = mongoose.model('Payments', paymentSchema);
 
 module.exports = Payment;

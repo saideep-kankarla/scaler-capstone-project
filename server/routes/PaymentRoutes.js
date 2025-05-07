@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const verifyToken = require('../middlewares/verifyJwt');
+
 const {
   paymentIntent,
   confirmPayment,
@@ -8,12 +10,13 @@ const {
   createPayment,
 } = require('../controllers/PaymentController');
 
-router.post('/create-payment-intent', paymentIntent);
-router.post('/confirm-payment', confirmPayment);
-router.post('/retrieve-payment-status', retrievePayment);
+router.post('/create-payment-intent', verifyToken, paymentIntent);
+router.post('/confirm-payment', verifyToken, confirmPayment);
+router.post('/retrieve-payment-status', verifyToken, retrievePayment);
 
-router.get('/getAllPayments', getAllPayments);
-router.get('/getPaymentById/:id', getPaymentById);
-router.post('/create', createPayment);
+router.post('/create', verifyToken, createPayment);
+
+router.get('/getAllPayments', verifyToken, getAllPayments);
+router.get('/getPaymentById/:id', verifyToken, getPaymentById);
 
 module.exports = router;
