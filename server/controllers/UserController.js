@@ -133,6 +133,7 @@ const updatePremiumSubscription = async (req, res) => {
     res.status(200).json({
       status: 200,
       message: 'User Subscription Updated Successfully',
+      user: updatedUser,
     });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error on patch' });
