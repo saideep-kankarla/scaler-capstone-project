@@ -12,8 +12,10 @@ import ProfileInfo from './ProfileInfo.jsx';
 import UsersTable from './UsersTable.jsx';
 import AlbumForm from './AlbumForm.jsx';
 import AlbumsTable from './AlbumsTable.jsx';
-
 import PremiumPage from './PremiumPage.jsx';
+
+import Checkout from './CheckoutStripe.jsx';
+import PaymentConfirm from './PaymentConfirm.jsx';
 
 const Layout = () => {
   return (
@@ -47,11 +49,16 @@ const Layout = () => {
 
                     <Route path="/profile" element={<ProfilePage />}>
                       <Route index element={<ProfileInfo />} />
+                      <Route path="checkout" element={<Checkout />} />
                       <Route path="usersTable" element={<UsersTable />} />
                       <Route path="addAlbum" element={<AlbumForm />} />
                       <Route path="albumsTable" element={<AlbumsTable />} />
                     </Route>
 
+                    <Route
+                      path="/PaymentConfirm"
+                      element={<PaymentConfirm />}
+                    />
                     <Route path="/premium" element={<PremiumPage />} />
                   </Routes>
                 </main>

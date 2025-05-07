@@ -8,6 +8,7 @@ const connectDB = require('./db');
 
 const userRoutes = require('./routes/UserRoutes');
 const albumRoutes = require('./routes/AlbumRoutes');
+const paymentRoutes = require('./routes/PaymentRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use((err, req, res, next) => {
 // user routes
 app.use('/api/users', userRoutes);
 app.use('/api/albums', albumRoutes);
+app.use('/api/payments', paymentRoutes);
 
 app.use('/', (req, res) => {
   res.send('Welcome to audiio app server!');

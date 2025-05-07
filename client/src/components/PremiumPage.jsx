@@ -6,7 +6,11 @@ import {
   CardMedia,
   Typography,
   Stack,
+  Button,
+  Divider,
 } from '@mui/material';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+
 import { useAuth } from '../hooks/AuthProvider';
 import { Link } from 'react-router-dom';
 import axios from '../utils/axios-config';
@@ -72,7 +76,7 @@ const Home = () => {
                   </Link>
                 ))
               ) : (
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom variant="body1">
                   Stay tuned, we will be back with top quality premium content.
                   content.
                 </Typography>
@@ -80,10 +84,40 @@ const Home = () => {
             </Stack>
           </div>
         ) : (
-          <Typography gutterBottom variant="h6">
-            Please get premium membership to access top quality premium content.
-            <Link to="/profile"> Get Premium Membership.</Link>
-          </Typography>
+          <Fragment>
+            <Typography gutterBottom variant="h5">
+              Why get premium membership ?
+            </Typography>
+            <Typography gutterBottom variant="overline">
+              <p>
+                <b>Top Quality : </b>
+                Get access to top quality premium content.
+              </p>
+              <Divider />
+              <p>
+                <b>Exclusive releases : </b>
+                Get early access to new music from top artists, only available
+                to premium members.
+              </p>
+              <p>
+                <b> Personalized playlists : </b> Unlock tailored playlists
+                based on your listening history and preferences, updated
+                regularly.
+              </p>
+              <br />
+              <br />
+              <Link to="/profile/checkout">
+                <Button
+                  variant="contained"
+                  color="success"
+                  size="large"
+                  endIcon={<WorkspacePremiumIcon />}
+                >
+                  Get Premium Membership for life-time
+                </Button>
+              </Link>
+            </Typography>
+          </Fragment>
         )}
       </div>
     </Fragment>
