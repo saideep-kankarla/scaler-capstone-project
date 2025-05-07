@@ -89,54 +89,6 @@ exports.getAlbumById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-exports.updateAlbum = async (req, res) => {
-  try {
-    const album = await Album.findById(req.params.id);
-    if (!album) {
-      return res.status(404).json({ message: 'Album not found' });
-    }
-
-    await new Promise((resolve, reject) => {
-      uploadFiles(req, res, (err) => {
-        if (err) reject(err);
-        else resolve();
-      });
-    });
-
-    const {
-      name,
-      language,
-      composer,
-      description,
-      releaseYear,
-      premium,
-      singerName,
-    } = req.body;
-    if (req.files.poster) album.poster = req.files.poster[0].filename;
-    if (req.files.songs) {
-      album.songs = req.files.songs.map((song) => ({
-        title: song.originalname.split('.')[0],
-        duration: '00:00',
-        singerName,
-        mp3Path: song.filename,
-      }));
-    }
-
-    album.name = name;
-    album.language = language;
-    album.composer = composer;
-    album.description = description;
-    album.releaseYear = releaseYear;
-    album.premium = premium === 'true';
-
-    await album.save();
-    res.status(200).json(album);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 exports.deleteAlbum = async (req, res) => {
   try {
     await Album.findByIdAndDelete(req.params.id);

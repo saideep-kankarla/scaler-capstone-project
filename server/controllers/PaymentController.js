@@ -1,9 +1,8 @@
 const Payment = require('../models/Payment');
+require('dotenv').config();
 
 // This is your test secret API key.
-const stripe = require('stripe')(
-  'sk_test_51RLqmkCp3ZflPRdBmpBaT9TUJ5R6vDZyVTzsY0AFWOkrwMguxfCtadsbBASIxxglnPtx6a0CiXjjGWxz2ng9Zc9R00izsoDXuD'
-);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Endpoint to create a payment intent
 const paymentIntent = async (req, res) => {

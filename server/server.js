@@ -10,12 +10,14 @@ const userRoutes = require('./routes/UserRoutes');
 const albumRoutes = require('./routes/AlbumRoutes');
 const paymentRoutes = require('./routes/PaymentRoutes');
 
+require('dotenv').config();
+
 const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174'],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    origin: [process.env.REACT_APP_URL],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
@@ -51,8 +53,8 @@ app.use('/', (req, res) => {
 
 connectDB()
   .then(() => {
-    app.listen(8080, () => {
-      console.log('Server started on port 8080');
+    app.listen(process.env.PORT, () => {
+      console.log(`Server started on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
