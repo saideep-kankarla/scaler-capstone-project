@@ -86,7 +86,6 @@ const Header = () => {
         slotProps={{
           paper: {
             elevation: 0,
-
             sx: {
               width: '200px',
               overflow: 'visible',

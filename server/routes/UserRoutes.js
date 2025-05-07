@@ -4,6 +4,7 @@ const {
   register,
   getAllUsers,
   deleteUser,
+  updatePremiumSubscription,
 } = require('../controllers/UserController');
 
 const verifyToken = require('../middlewares/verifyJwt');
@@ -17,6 +18,9 @@ router.get('/allUsers', verifyToken, getAllUsers);
 //Post routes
 router.post('/login', login);
 router.post('/register', register);
+
+router.put('/subscribe/:id', verifyToken, updatePremiumSubscription);
+
 router.delete('/deleteUser/:userId', verifyToken, deleteUser);
 
 module.exports = router;

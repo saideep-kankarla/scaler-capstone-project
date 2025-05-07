@@ -2,6 +2,7 @@ import { Button, Divider, Typography } from '@mui/material';
 import { useAuth } from '../hooks/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import { Link } from 'react-router-dom';
 
 const ProfileInfo = () => {
   // check for logged in user for protected routes
@@ -28,14 +29,16 @@ const ProfileInfo = () => {
           <br />
           <br />
           {!auth?.user?.premiumSubscribed ? (
-            <Button
-              variant="contained"
-              color="success"
-              size="large"
-              endIcon={<WorkspacePremiumIcon />}
-            >
-              Get Premium Membership
-            </Button>
+            <Link to="/profile/checkout">
+              <Button
+                variant="contained"
+                color="success"
+                size="large"
+                endIcon={<WorkspacePremiumIcon />}
+              >
+                Get Premium Membership for life-time
+              </Button>
+            </Link>
           ) : (
             ''
           )}
