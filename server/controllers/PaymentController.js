@@ -102,6 +102,20 @@ const createPayment = async (req, res) => {
   }
 };
 
+const deletePayment = async (req, res) => {
+  try {
+    const payId = req.params.id;
+    console.log('Inside delete user', payId);
+
+    const user = await Payment.findByIdAndDelete(payId);
+    console.log(`Deleted Payment: ${user}`);
+
+    res.status(204).json({ status: 200, message: 'Deleted Successfully' });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
 module.exports = {
   paymentIntent,
   confirmPayment,
@@ -109,4 +123,5 @@ module.exports = {
   getAllPayments,
   getPaymentById,
   createPayment,
+  deletePayment,
 };
