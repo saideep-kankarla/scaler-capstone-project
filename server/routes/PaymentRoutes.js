@@ -8,6 +8,7 @@ const {
   getAllPayments,
   getPaymentById,
   createPayment,
+  deletePayment,
 } = require('../controllers/PaymentController');
 
 router.post('/create-payment-intent', verifyToken, paymentIntent);
@@ -18,5 +19,7 @@ router.post('/create', verifyToken, createPayment);
 
 router.get('/getAllPayments', verifyToken, getAllPayments);
 router.get('/getPaymentById/:id', verifyToken, getPaymentById);
+
+router.delete('/deletePayment/:id', verifyToken, deletePayment);
 
 module.exports = router;

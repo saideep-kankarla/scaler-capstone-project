@@ -94,6 +94,18 @@ const ProfilePage = () => {
                               <ListItemText primary="List Album(s)" />
                             </ListItemButton>
                           </Link>
+                          <Divider />
+                          <Link
+                            to="payments"
+                            state={{ from: location.pathname }}
+                          >
+                            <ListItemButton
+                              selected={selectedIndex === 5}
+                              onClick={(event) => handleListItemClick(event, 5)}
+                            >
+                              <ListItemText primary="Payments" />
+                            </ListItemButton>
+                          </Link>
                         </Fragment>
                       ) : (
                         ''
