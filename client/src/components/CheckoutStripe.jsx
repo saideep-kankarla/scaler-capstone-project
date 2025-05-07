@@ -29,7 +29,7 @@ function PaymentForm() {
     if (error) {
       console.error(error);
     } else if (paymentIntent.status === 'succeeded') {
-      console.log('Payment successful!');
+      console.log('Payment successful!', paymentIntent);
     }
   };
 

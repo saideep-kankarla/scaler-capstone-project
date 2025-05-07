@@ -1,5 +1,4 @@
-// controllers/AuthController.js
-// const User = require('../models/User');
+const Payment = require('../models/Payment');
 
 // This is your test secret API key.
 const stripe = require('stripe')(
@@ -57,4 +56,46 @@ const retrievePayment = async (req, res) => {
   }
 };
 
-module.exports = { paymentIntent, confirmPayment, retrievePayment };
+exports.getAllPayments = async (req, res) => {
+  try {
+    const payments = await Payment.find().exec();
+    res.status(200).json({ status: 200, message: 'Success', payments });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching payments' });
+  }
+};
+
+exports.getPaymentById = async (req, res) => {
+  try {
+    const paymentId = req.params.id;
+    const payment = await Payment.findById(paymentId).exec();
+    if (!payment) {
+      res.status(404).json({ message: 'Payment not found' });
+    } else {
+      res.status(200).json({ status: 200, message: 'Success', payment });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching payment' });
+  }
+};
+
+exports.createPayment = async (req, res) => {
+  try {
+    const payment = new Payment(req.body);
+    await payment.save();
+    res
+      .status(201)
+      .json({ status: 201, message: 'Payment Created Successfully', payment });
+  } catch (error) {
+    res.status(400).json({ message: 'Error creating payment', error });
+  }
+};
+
+module.exports = {
+  paymentIntent,
+  confirmPayment,
+  retrievePayment,
+  getAllPayments,
+  getPaymentById,
+  createPayment,
+};
