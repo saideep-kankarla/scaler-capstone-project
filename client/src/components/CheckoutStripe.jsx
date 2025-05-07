@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -8,13 +9,15 @@ import {
   useElements,
   PaymentElement,
 } from '@stripe/react-stripe-js';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+
 import axios from '../utils/axios-config';
 import { useAuth } from '../hooks/AuthProvider';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
 
-function PaymentForm() {
+const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const auth = useAuth();
@@ -33,12 +36,17 @@ function PaymentForm() {
     if (error) {
       console.error(error);
     } else if (paymentIntent.status === 'succeeded') {
-      console.log('Payment successful!', paymentIntent);
+      console.log(
+        'Payment successful!',
+        paymentIntent,
+        auth?.user?.id,
+        typeof auth?.user?.id,
+      );
       const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
 
       const response = await axios.post(`${apiBaseUrl}/api/payments/create`, {
         stripePaymentId: paymentIntent.id,
-        userId: auth?.user?._id,
+        userId: auth?.user?.id,
         amount: paymentIntent.amount / 100,
         status: paymentIntent.status,
       });
@@ -48,16 +56,18 @@ function PaymentForm() {
         console.log('Payment record added.');
       }
 
-      const responseUserPremium = await axios.patch(
-        `${apiBaseUrl}/api/payments/premium-subscribe`,
-        {},
+      const responseUserPremium = await axios.put(
+        `${apiBaseUrl}/api/users/subscribe/${auth?.user?.id}`,
       );
-      const patchStatus = responseUserPremium.data.status;
-      if (patchStatus === 200) {
+
+      console.log('Subscription updated:', responseUserPremium.data);
+
+      const putStatus = responseUserPremium.data.status;
+      if (putStatus === 200) {
         console.log('User premium subscription field updated.');
       }
 
-      if (status === 201 && patchStatus === 200) {
+      if (status === 201 && putStatus === 200) {
         navigate('/paymentSuccess');
       } else {
         navigate('/paymentFail');
@@ -68,14 +78,22 @@ function PaymentForm() {
   return (
     <form onSubmit={handlePayment}>
       <PaymentElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
+      <Button
+        sx={{ margin: '30px 0', width: '100%' }}
+        variant="contained"
+        color="success"
+        size="large"
+        type="submit"
+        disabled={!stripe}
+        endIcon={<WorkspacePremiumIcon />}
+      >
+        <b>Pay $10&nbsp;</b> for life-time premium subscription
+      </Button>
     </form>
   );
-}
+};
 
-function CheckoutStripe() {
+const CheckoutStripe = () => {
   const auth = useAuth();
   const [clientSecret, setClientSecret] = useState('');
 
@@ -100,6 +118,6 @@ function CheckoutStripe() {
       <PaymentForm />
     </Elements>
   );
-}
+};
 
 export default CheckoutStripe;

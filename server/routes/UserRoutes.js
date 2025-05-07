@@ -19,7 +19,7 @@ router.get('/allUsers', verifyToken, getAllUsers);
 router.post('/login', login);
 router.post('/register', register);
 
-router.patch('/premium-subscribe', verifyToken, updatePremiumSubscription);
+router.put('/subscribe/:id', verifyToken, updatePremiumSubscription);
 
 router.delete('/deleteUser/:userId', verifyToken, deleteUser);
 

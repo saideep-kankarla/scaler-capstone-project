@@ -37,6 +37,7 @@ const register = async (req, res) => {
     res.status(500).json({ status: 500, message: err.message });
   }
 };
+
 const login = async (req, res) => {
   try {
     console.log('Login Attempt..');
@@ -76,6 +77,7 @@ const login = async (req, res) => {
       status: 200,
       success: 'Authenticated Successfully!',
       user: {
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
@@ -119,19 +121,19 @@ const deleteUser = async (req, res) => {
 
 const updatePremiumSubscription = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.params.id;
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { premiumSubscribed: true },
       { new: true }
     );
 
-    if (!updatedUser) {
-      return res.status(304).json({ message: 'User not found' });
-    }
-    res
-      .status(201)
-      .json({ status: 200, message: 'User Subscription Updated Successfully' });
+    if (!updatedUser)
+      return res.status(404).json({ message: 'User not found' });
+    res.status(200).json({
+      status: 200,
+      message: 'User Subscription Updated Successfully',
+    });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error on patch' });
   }
