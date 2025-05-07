@@ -15,7 +15,7 @@ import AlbumsTable from './AlbumsTable.jsx';
 import PremiumPage from './PremiumPage.jsx';
 
 import Checkout from './CheckoutStripe.jsx';
-import PaymentConfirm from './PaymentConfirm.jsx';
+import PaymentStatus from './PaymentStatus.jsx';
 
 const Layout = () => {
   return (
@@ -55,10 +55,7 @@ const Layout = () => {
                       <Route path="albumsTable" element={<AlbumsTable />} />
                     </Route>
 
-                    <Route
-                      path="/PaymentConfirm"
-                      element={<PaymentConfirm />}
-                    />
+                    <Route path="/paymentStatus" element={<PaymentStatus />} />
                     <Route path="/premium" element={<PremiumPage />} />
                   </Routes>
                 </main>

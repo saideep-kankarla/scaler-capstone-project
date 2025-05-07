@@ -46,4 +46,15 @@ const confirmPayment = async (req, res) => {
   }
 };
 
-module.exports = { paymentIntent, confirmPayment };
+const retrievePayment = async (req, res) => {
+  try {
+    const paymentIntentId = req.body.paymentIntentId;
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    res.json({ status: paymentIntent.status });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to retrieve payment status' });
+  }
+};
+
+module.exports = { paymentIntent, confirmPayment, retrievePayment };
