@@ -16,5 +16,6 @@ Github repo - https://github.com/saideep-kankarla/scaler-capstone-project
 
 # Project Hosted at
 
-React app @ - https://scaler-capstone-project-react.onrender.com/\
+React app @ - https://scaler-capstone-project-react.onrender.com/ \
+
 Node app @ - https://scaler-capstone-project.onrender.com/
