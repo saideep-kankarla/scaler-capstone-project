@@ -144,7 +144,12 @@ const Header = () => {
           </Link>
         </div>
         <Divider />
-        <MenuItem onClick={auth?.logout}>
+        <MenuItem
+          onClick={() => {
+            auth?.logout();
+            setAnchorEl(null);
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

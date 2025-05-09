@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['https://scaler-capstone-project-react.onrender.com'],
+    origin: [process.env.REACT_APP_URL, process.env.REACT_APP_URL_LOCAL],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
