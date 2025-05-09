@@ -15,7 +15,8 @@ import axios from '../utils/axios-config';
 import { useAuth } from '../hooks/AuthProvider';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+const apiBaseUrl =
+  import.meta.env.VITE_NODE_API_URL || import.meta.env.VITE_NODE_API_URL_LOCAL;
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -42,7 +43,9 @@ const PaymentForm = () => {
         auth?.user?.id,
         typeof auth?.user?.id,
       );
-      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+      const apiBaseUrl =
+        import.meta.env.VITE_NODE_API_URL ||
+        import.meta.env.VITE_NODE_API_URL_LOCAL;
 
       const response = await axios.post(`${apiBaseUrl}/api/payments/create`, {
         stripePaymentId: paymentIntent.id,

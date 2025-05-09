@@ -19,7 +19,9 @@ const Home = () => {
   const [data, setData] = useState([]);
   const auth = useAuth();
 
-  const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+  const apiBaseUrl =
+    import.meta.env.VITE_NODE_API_URL ||
+    import.meta.env.VITE_NODE_API_URL_LOCAL;
 
   // Fetch data from API
   useEffect(() => {

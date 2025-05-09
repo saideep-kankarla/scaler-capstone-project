@@ -1,6 +1,7 @@
 // axios-config.js
 import axios from 'axios';
-const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+const apiBaseUrl =
+  import.meta.env.VITE_NODE_API_URL || import.meta.env.VITE_NODE_API_URL_LOCAL;
 
 const instance = axios.create({
   baseURL: apiBaseUrl,

@@ -36,7 +36,9 @@ const RegisterForm = () => {
     );
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+      const apiBaseUrl =
+        import.meta.env.VITE_NODE_API_URL ||
+        import.meta.env.VITE_NODE_API_URL_LOCAL;
 
       const response = await axios.post(`${apiBaseUrl}/api/users/register`, {
         name,

@@ -19,7 +19,9 @@ const AlbumPage = () => {
   const [data, setData] = useState([]);
   const [sData, setsData] = useState([]);
   const [currentActiveSong, setCurrentActiveSong] = useState(1);
-  const apiBaseUrl = import.meta.env.VITE_NODE_API_URL;
+  const apiBaseUrl =
+    import.meta.env.VITE_NODE_API_URL ||
+    import.meta.env.VITE_NODE_API_URL_LOCAL;
 
   // Fetch data from API
   useEffect(() => {
